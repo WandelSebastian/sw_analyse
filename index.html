@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krafttraining - Trainingsplanung</title>
+<style>
+:root {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --bg-card: #0f3460;
+  --bg-input: #1a1a3e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0b0;
+  --text-heading: #ffffff;
+  --accent: #e94560;
+  --accent-hover: #ff6b81;
+  --border: #2a2a4a;
+  --success: #4caf50;
+  --warning: #ff9800;
+  --danger: #f44336;
+  --shadow: rgba(0,0,0,0.3);
+  --radius: 8px;
+  --transition: 0.2s ease;
+}
+[data-theme="light"] {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #f0f0f0;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-heading: #1a1a1a;
+  --border: #ddd;
+  --shadow: rgba(0,0,0,0.1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}
+/* NAV */
+.app-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.app-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-tab {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+.nav-tab:hover { color: var(--text-primary); }
+.nav-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.btn-icon {
+  width: 36px; height: 36px;
+  border: none;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background var(--transition);
+}
+.btn-icon:hover { background: var(--accent); color: #fff; }
+/* VIEWS */
+.view { display: none; padding: 16px; max-width: 1400px; margin: 0 auto; }
+.view.active { display: block; }
+/* CARDS */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+/* BUTTONS */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-secondary { background: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--border); }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover { opacity: 0.85; }
+.btn-sm { padding: 4px 10px; font-size: 12px; }
+.btn-block { width: 100%; justify-content: center; }
+/* FORMS */
+.form-group { margin-bottom: 12px; }
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+.form-input, .form-select {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color var(--transition);
+}
+.form-input:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+/* GRID */
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+/* MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  overflow-y: auto;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 32px var(--shadow);
+}
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+}
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+/* STATS */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-align: center;
+}
+.stat-value { font-size: 28px; font-weight: 700; color: var(--accent); }
+.stat-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+/* TABLE */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.data-table th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.data-table tr:hover { background: rgba(233,69,96,0.05); }
+/* BADGE */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-level { background: var(--accent); color: #fff; }
+.badge-intensity-1 { background: #4caf50; color: #fff; }
+.badge-intensity-2 { background: #8bc34a; color: #000; }
+.badge-intensity-3 { background: #ff9800; color: #000; }
+.badge-intensity-4 { background: #f44336; color: #fff; }
+/* SEARCH */
+.search-bar {
+  position: relative;
+  margin-bottom: 16px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 14px;
+}
+.search-bar input:focus { outline: none; border-color: var(--accent); }
+.search-bar::before {
+  content: '\1F50D';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+/* WEEKLY PLANNER */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 12px;
+}
+.day-column {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+.day-header {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  position: relative;
+}
+.day-header .intensity-badge {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  margin-left: 4px;
+}
+.day-blocks {
+  flex: 1;
+  padding: 4px;
+  min-height: 100px;
+}
+.day-blocks.drag-over {
+  background: rgba(233,69,96,0.1);
+  border: 2px dashed var(--accent);
+}
+.training-block {
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: grab;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  position: relative;
+  transition: transform 0.1s;
+}
+.training-block:active { cursor: grabbing; transform: scale(1.02); }
+.training-block .block-remove {
+  cursor: pointer;
+  opacity: 0.7;
+  font-size: 14px;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0 2px;
+}
+.training-block .block-remove:hover { opacity: 1; }
+.training-block .block-info {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+.day-footer {
+  padding: 6px 8px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+.day-footer .rpe-total {
+  font-weight: 600;
+  color: var(--accent);
+}
+/* BLOCK PALETTE */
+.block-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.palette-block {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: grab;
+  color: #fff;
+  user-select: none;
+}
+.palette-block:active { cursor: grabbing; }
+/* WEEK CONTROLS */
+.week-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+/* PLAYER VIEW */
+.player-plan-view .exercise-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-bottom: 8px;
+}
+.exercise-card .exercise-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-heading);
+}
+.exercise-card .exercise-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+.exercise-card .detail-item {
+  text-align: center;
+}
+.exercise-card .detail-label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+.exercise-card .detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+.exercise-card .weight-input {
+  width: 70px;
+  padding: 4px 6px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 13px;
+  text-align: center;
+}
+/* EXERCISE LIBRARY */
+.exercise-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.exercise-filters select {
+  padding: 6px 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 13px;
+}
+.progression-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  margin: 8px 0;
+}
+.progression-step {
+  padding: 4px 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 11px;
+  position: relative;
+}
+.progression-step.current {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.progression-arrow { color: var(--text-secondary); font-size: 14px; }
+/* MEDIA */
+.media-upload {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+.media-upload:hover { border-color: var(--accent); }
+.media-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: var(--radius);
+  margin-top: 8px;
+}
+.media-preview video { max-width: 100%; border-radius: var(--radius); }
+/* TABS INSIDE VIEWS */
+.sub-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sub-tab {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+}
+.sub-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .app-header { padding: 0 8px; }
+  .app-logo { font-size: 14px; }
+  .nav-tab { padding: 8px 10px; font-size: 12px; }
+  .week-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .day-column { min-height: 120px; }
+  .view { padding: 8px; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .modal { padding: 16px; }
+  .week-controls { flex-direction: column; align-items: stretch; }
+}
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+/* TOAST */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast {
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 4px 12px var(--shadow);
+  animation: slideIn 0.3s ease;
+  max-width: 350px;
+}
+.toast-success { background: var(--success); }
+.toast-error { background: var(--danger); }
+.toast-info { background: #2196f3; }
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+.empty-state-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state-text { font-size: 16px; }
+/* LOADING */
+.loading-spinner {
+  display: inline-block;
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+/* PLAYER SELECT */
+.player-select-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+/* DAY PICKER */
+.day-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+.day-picker-btn {
+  padding: 14px 8px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: center;
+}
+.day-picker-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+/* DIALOG OPTIONS */
+.dialog-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 12px 0;
+}
+.dialog-option-btn {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition);
+}
+.dialog-option-btn:hover {
+  border-color: var(--accent);
+  background: rgba(233,69,96,0.1);
+}
+/* CONFIRM DIALOG */
+.dialog-message {
+  font-size: 15px;
+  color: var(--text-primary);
+  margin: 8px 0 16px;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-logo">Krafttraining</div>
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-view="dashboard">Dashboard</button>
+    <button class="nav-tab" data-view="planner">Wochenplanung</button>
+    <button class="nav-tab" data-view="players">Spieler</button>
+    <button class="nav-tab" data-view="exercises">Bibliothek</button>
+    <button class="nav-tab" data-view="player-view">Spieler-Ansicht</button>
+  </nav>
+  <div class="header-actions">
+    <button class="btn-icon" id="themeToggle" title="Theme wechseln">&#9790;</button>
+  </div>
+</header>
+
+<!-- DASHBOARD -->
+<div id="view-dashboard" class="view active">
+  <h2 style="color:var(--text-heading);margin-bottom:16px">Dashboard</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-value" id="stat-players">0</div><div class="stat-label">Spieler</div></div>
+    <div class="stat-card"><div class="stat-value" id="stat-plans">0</div><div class="stat-label">Wochenpläne</div></div>
+    <div class="stat-card"><div class="stat-value" id="stat-exercises">0</div><div class="stat-label">Übungen</div></div>
+    <div class="stat-card"><div class="stat-value" id="stat-media">0</div><div class="stat-label">Medien</div></div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Aktuelle Spieler</span>
+        <button class="btn btn-primary btn-sm" onclick="App.showView('players')">Alle anzeigen</button>
+      </div>
+      <div id="dashboard-players"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Letzte Wochenpläne</span>
+        <button class="btn btn-primary btn-sm" onclick="App.showView('planner')">Neue Planung</button>
+      </div>
+      <div id="dashboard-plans"></div>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY PLANNER -->
+<div id="view-planner" class="view">
+  <h2 style="color:var(--text-heading);margin-bottom:16px">Wochenplanung</h2>
+  <div class="week-controls">
+    <div class="player-select-bar" style="flex:1">
+      <label class="form-label" style="margin:0;white-space:nowrap">Spieler:</label>
+      <select class="form-select" id="planner-player" style="max-width:200px">
+        <option value="">-- Spieler wählen --</option>
+      </select>
+      <label class="form-label" style="margin:0;white-space:nowrap;margin-left:12px">Woche:</label>
+      <input type="week" class="form-input" id="planner-week" style="max-width:180px">
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <select class="form-select" id="planner-template" style="max-width:250px">
+        <option value="">-- Template laden --</option>
+      </select>
+      <button class="btn btn-primary btn-sm" onclick="Planner.loadTemplate()">Laden</button>
+      <button class="btn btn-secondary btn-sm" onclick="Planner.clearWeek()">Leeren</button>
+      <button class="btn btn-primary btn-sm" onclick="Planner.savePlan()">Speichern</button>
+    </div>
+  </div>
+  <div class="card" style="padding:8px">
+    <div style="margin-bottom:8px;font-size:13px;color:var(--text-secondary)">Bausteine per Drag &amp; Drop oder Klick in den Wochenplan ziehen:</div>
+    <div class="block-palette" id="block-palette"></div>
+  </div>
+  <div class="week-grid" id="week-grid"></div>
+  <div class="card" style="margin-top:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="card-title">Wochen-Zusammenfassung</span>
+      <span id="week-total-rpe" style="font-size:20px;font-weight:700;color:var(--accent)">RPE: 0</span>
+    </div>
+  </div>
+</div>
+
+<!-- PLAYERS -->
+<div id="view-players" class="view">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <h2 style="color:var(--text-heading)">Spieler-Verwaltung</h2>
+    <button class="btn btn-primary" onclick="Players.showAddModal()">+ Spieler anlegen</button>
+  </div>
+  <div class="search-bar">
+    <input type="text" id="player-search" placeholder="Spieler suchen..." oninput="Players.filter()">
+  </div>
+  <div class="grid grid-3" id="player-list"></div>
+</div>
+
+<!-- EXERCISE LIBRARY -->
+<div id="view-exercises" class="view">
+  <h2 style="color:var(--text-heading);margin-bottom:16px">Übungsbibliothek</h2>
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="Exercises.showSubTab('list',this)">Übungen</button>
+    <button class="sub-tab" onclick="Exercises.showSubTab('progressions',this)">Progressionen</button>
+  </div>
+  <div id="exercises-list-tab">
+    <div class="exercise-filters">
+      <select id="ex-filter-level" onchange="Exercises.filter()">
+        <option value="">Alle Level</option>
+        <option value="A">Level A</option><option value="B">Level B</option>
+        <option value="C">Level C</option><option value="D">Level D</option>
+        <option value="E">Level E</option><option value="F">Level F</option>
+        <option value="1">Level 1</option><option value="2">Level 2</option>
+        <option value="3">Level 3</option><option value="4">Level 4</option>
+        <option value="5">Level 5</option><option value="6">Level 6</option>
+      </select>
+      <select id="ex-filter-body" onchange="Exercises.filter()">
+        <option value="">Alle Bereiche</option>
+        <option value="lowerBody">Unterkörper</option>
+        <option value="upperBody">Oberkörper</option>
+      </select>
+      <select id="ex-filter-block" onchange="Exercises.filter()">
+        <option value="">Alle Blöcke</option>
+        <option value="explosiv">Explosiv</option>
+        <option value="strengthA">Kraft A</option>
+        <option value="strengthB">Kraft B</option>
+        <option value="isometrics">Isometrics</option>
+      </select>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="ex-search" placeholder="Übung suchen..." oninput="Exercises.filter()">
+    </div>
+    <div id="exercise-list-content"></div>
+  </div>
+  <div id="exercises-progressions-tab" style="display:none">
+    <div class="exercise-filters">
+      <select id="prog-filter-body" onchange="Exercises.filterProgressions()">
+        <option value="">Alle Bereiche</option>
+        <option value="lowerBody">Unterkörper</option>
+        <option value="upperBody">Oberkörper</option>
+      </select>
+    </div>
+    <div id="progression-list-content"></div>
+  </div>
+</div>
+
+<!-- PLAYER VIEW -->
+<div id="view-player-view" class="view player-plan-view">
+  <h2 style="color:var(--text-heading);margin-bottom:16px">Spieler-Ansicht</h2>
+  <div class="player-select-bar">
+    <label class="form-label" style="margin:0">Spieler:</label>
+    <select class="form-select" id="pv-player" style="max-width:200px" onchange="PlayerView.load()">
+      <option value="">-- Spieler wählen --</option>
+    </select>
+  </div>
+  <div id="player-view-content">
+    <div class="empty-state">
+      <div class="empty-state-icon">&#128100;</div>
+      <div class="empty-state-text">Bitte einen Spieler auswählen</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-player">
+  <div class="modal">
+    <div class="modal-title" id="modal-player-title">Spieler anlegen</div>
+    <input type="hidden" id="player-edit-id">
+    <div class="form-group">
+      <label class="form-label">Name *</label>
+      <input type="text" class="form-input" id="player-name" placeholder="Vorname Nachname">
+    </div>
+    <div class="grid grid-2" style="gap:12px">
+      <div class="form-group">
+        <label class="form-label">Größe (cm)</label>
+        <input type="number" class="form-input" id="player-height" placeholder="180">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Gewicht (kg)</label>
+        <input type="number" class="form-input" id="player-weight" placeholder="75">
+      </div>
+    </div>
+    <div class="grid grid-2" style="gap:12px">
+      <div class="form-group">
+        <label class="form-label">Level *</label>
+        <select class="form-select" id="player-level">
+          <option value="A">Level A</option><option value="B">Level B</option>
+          <option value="C">Level C</option><option value="D">Level D</option>
+          <option value="E">Level E</option><option value="F">Level F</option>
+          <option value="1">Level 1</option><option value="2">Level 2</option>
+          <option value="3">Level 3</option><option value="4">Level 4</option>
+          <option value="5">Level 5</option><option value="6">Level 6</option>
+          <option value="7">Level 7</option><option value="8">Level 8</option>
+          <option value="9">Level 9</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Geburtsdatum</label>
+        <input type="date" class="form-input" id="player-dob">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notizen</label>
+      <textarea class="form-input" id="player-notes" rows="3" placeholder="Verletzungen, Besonderheiten..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="Players.closeModal()">Abbrechen</button>
+      <button class="btn btn-primary" onclick="Players.save()">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-exercise-detail">
+  <div class="modal" style="max-width:700px">
+    <div class="modal-title" id="ex-detail-title"></div>
+    <div id="ex-detail-content"></div>
+    <div id="ex-detail-media"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="Exercises.closeDetail()">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-block-detail">
+  <div class="modal" style="max-width:800px;max-height:90vh;overflow-y:auto">
+    <div class="modal-title" id="block-detail-title"></div>
+    <div id="block-detail-content"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="document.getElementById('modal-block-detail').classList.remove('active')">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- GENERIC DIALOG -->
+<div class="modal-overlay" id="modal-dialog">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-title" id="dialog-title"></div>
+    <div id="dialog-content"></div>
+    <div class="modal-actions" id="dialog-actions"></div>
+  </div>
+</div>
+
+<!-- DAY PICKER DIALOG -->
+<div class="modal-overlay" id="modal-day-picker">
+  <div class="modal" style="max-width:380px">
+    <div class="modal-title" id="day-picker-title">Tag auswählen</div>
+    <div class="day-picker-grid" id="day-picker-grid"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="AppDialog.closeDayPicker()">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<script>
+// ============================================================================
+// DATA ACCESS LAYER (DAL)
+// ============================================================================
+const DAL = {
+  DB_NAME: 'KrafttrainingDB',
+  DB_VERSION: 1,
+  db: null,
+
+  async init() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(this.DB_NAME, this.DB_VERSION);
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('players')) db.createObjectStore('players', {keyPath:'id'});
+        if (!db.objectStoreNames.contains('weekPlans')) db.createObjectStore('weekPlans', {keyPath:'id'});
+        if (!db.objectStoreNames.contains('media')) db.createObjectStore('media', {keyPath:'id'});
+        if (!db.objectStoreNames.contains('settings')) db.createObjectStore('settings', {keyPath:'key'});
+        if (!db.objectStoreNames.contains('playerLogs')) db.createObjectStore('playerLogs', {keyPath:'id'});
+      };
+      req.onsuccess = (e) => { this.db = e.target.result; resolve(); };
+      req.onerror = (e) => reject(e.target.error);
+    });
+  },
+
+  _tx(store, mode='readonly') {
+    return this.db.transaction(store, mode).objectStore(store);
+  },
+
+  async getAll(store) {
+    return new Promise((resolve, reject) => {
+      const req = this._tx(store).getAll();
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  },
+
+  async get(store, id) {
+    return new Promise((resolve, reject) => {
+      const req = this._tx(store).get(id);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  },
+
+  async put(store, data) {
+    return new Promise((resolve, reject) => {
+      const req = this._tx(store, 'readwrite').put(data);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  },
+
+  async delete(store, id) {
+    return new Promise((resolve, reject) => {
+      const req = this._tx(store, 'readwrite').delete(id);
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
+    });
+  },
+
+  genId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
+};
+
+// ============================================================================
+// DATA LOADER
+// ============================================================================
+const DataStore = {
+  exercises: null,
+  progressions: null,
+  templates: null,
+  warmup: null,
+
+  async loadAll() {
+    const base = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+    const load = async (file) => {
+      try {
+        const r = await fetch(base + 'data/' + file);
+        if (!r.ok) throw new Error(r.status);
+        return await r.json();
+      } catch(e) {
+        console.warn('Could not load ' + file + '. Serve via HTTP server (npx http-server) for full data.');
+        return null;
+      }
+    };
+    [this.exercises, this.progressions, this.templates, this.warmup] = await Promise.all([
+      load('exercises.json'), load('progressions.json'), load('templates.json'), load('warmup.json')
+    ]);
+
+    // Provide default building blocks if templates couldn't be loaded
+    if (!this.templates) {
+      this.templates = {
+        buildingBlocks: [
+          {id:'wu-spr',code:'WU Spr',name:'Warm-Up Sprung',defaultRPE:5,defaultDuration:30,color:'#4CAF50'},
+          {id:'ukk',code:'UKK',name:'Unterkörper Kraft',defaultRPE:6,defaultDuration:{'1-6':20,'7-9':45},color:'#2196F3'},
+          {id:'okk',code:'OKK',name:'Oberkörper Kraft',defaultRPE:6,defaultDuration:{'1-6':20,'7-9':45},color:'#FF9800'},
+          {id:'ukex',code:'Ukex',name:'Unterkörper Explosiv',defaultRPE:4,defaultDuration:10,color:'#E91E63'},
+          {id:'okex',code:'Okex',name:'Oberkörper Explosiv',defaultRPE:4,defaultDuration:10,color:'#9C27B0'},
+          {id:'ukp',code:'Ukp',name:'Unterkörper Prävention',defaultRPE:4,defaultDuration:{'1-6':15,'7-9':25},color:'#00BCD4'},
+          {id:'okp',code:'Okp',name:'Oberkörper Prävention',defaultRPE:4,defaultDuration:{'1-6':15,'7-9':25},color:'#009688'},
+          {id:'ukiso',code:'UKiso',name:'Unterkörper Isometrics',defaultRPE:5,defaultDuration:10,color:'#795548'},
+          {id:'okiso',code:'OKiso',name:'Oberkörper Isometrics',defaultRPE:4,defaultDuration:10,color:'#607D8B'},
+          {id:'bh1',code:'BH1',name:'Beweglichkeit/Haltung 1',defaultRPE:3,defaultDuration:10,color:'#8BC34A'},
+          {id:'bh2',code:'BH2',name:'Beweglichkeit/Haltung 2',defaultRPE:3,defaultDuration:10,color:'#CDDC39'},
+          {id:'kv1',code:'KV1',name:'Koordination/Prävention 1',defaultRPE:1,defaultDuration:10,color:'#FFC107'},
+          {id:'kv2',code:'KV2',name:'Koordination/Prävention 2',defaultRPE:2,defaultDuration:10,color:'#FF5722'},
+          {id:'praevention',code:'Prävention',name:'Prävention',defaultRPE:2,defaultDuration:10,color:'#3F51B5'}
+        ],
+        templates: []
+      };
+    }
+  },
+
+  getExercisesForLevel(level, bodyPart) {
+    if (!this.exercises || !this.exercises.levels || !this.exercises.levels[level]) return null;
+    return this.exercises.levels[level][bodyPart];
+  },
+
+  getAllExercisesFlat() {
+    if (!this.exercises || !this.exercises.levels) return [];
+    const flat = [];
+    for (const [level, data] of Object.entries(this.exercises.levels)) {
+      for (const bodyPart of ['lowerBody', 'upperBody']) {
+        const plan = data[bodyPart];
+        if (!plan) continue;
+        for (const block of ['explosiv', 'strengthA', 'strengthB', 'isometrics']) {
+          if (!plan[block]) continue;
+          plan[block].forEach(ex => {
+            flat.push({...ex, level, bodyPart, block});
+          });
+        }
+      }
+    }
+    return flat;
+  },
+
+  getBuildingBlocks() {
+    return this.templates && this.templates.buildingBlocks ? this.templates.buildingBlocks : [];
+  },
+
+  getTemplates() {
+    return this.templates && this.templates.templates ? this.templates.templates : [];
+  },
+
+  getProgressions() {
+    return this.progressions || {lowerBody:[], upperBody:[]};
+  },
+
+  getWarmup() {
+    return this.warmup || {categories:[]};
+  }
+};
+
+// ============================================================================
+// TOAST NOTIFICATIONS
+// ============================================================================
+function showToast(message, type='info') {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast toast-' + type;
+  t.textContent = message;
+  c.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(100%)'; setTimeout(()=>t.remove(),300); }, 3000);
+}
+
+// ============================================================================
+// APP DIALOG SYSTEM
+// ============================================================================
+const AppDialog = {
+  _resolve: null,
+
+  confirm(title, message, okText) {
+    return new Promise(resolve => {
+      const modal = document.getElementById('modal-dialog');
+      document.getElementById('dialog-title').textContent = title;
+      document.getElementById('dialog-content').innerHTML = `<div class="dialog-message">${message}</div>`;
+      document.getElementById('dialog-actions').innerHTML =
+        `<button class="btn btn-secondary" id="dialog-cancel">Abbrechen</button>
+         <button class="btn btn-danger" id="dialog-ok">${okText || 'Ja, bestätigen'}</button>`;
+      modal.classList.add('active');
+      document.getElementById('dialog-cancel').onclick = () => { modal.classList.remove('active'); resolve(false); };
+      document.getElementById('dialog-ok').onclick = () => { modal.classList.remove('active'); resolve(true); };
+    });
+  },
+
+  pickOption(title, options) {
+    return new Promise(resolve => {
+      const modal = document.getElementById('modal-dialog');
+      document.getElementById('dialog-title').textContent = title;
+      document.getElementById('dialog-content').innerHTML = '<div class="dialog-options">' +
+        options.map((opt, i) => `<button class="dialog-option-btn" data-idx="${i}">${opt.label}</button>`).join('') + '</div>';
+      document.getElementById('dialog-actions').innerHTML =
+        `<button class="btn btn-secondary" id="dialog-cancel">Abbrechen</button>`;
+      modal.classList.add('active');
+      document.getElementById('dialog-cancel').onclick = () => { modal.classList.remove('active'); resolve(null); };
+      document.getElementById('dialog-content').querySelectorAll('.dialog-option-btn').forEach(btn => {
+        btn.onclick = () => { modal.classList.remove('active'); resolve(options[parseInt(btn.dataset.idx)].value); };
+      });
+    });
+  },
+
+  pickDay(title) {
+    return new Promise(resolve => {
+      const modal = document.getElementById('modal-day-picker');
+      document.getElementById('day-picker-title').textContent = title || 'Tag auswählen';
+      const days = [
+        {key:'montag',label:'Mo'},{key:'dienstag',label:'Di'},{key:'mittwoch',label:'Mi'},
+        {key:'donnerstag',label:'Do'},{key:'freitag',label:'Fr'},{key:'samstag',label:'Sa'},{key:'sonntag',label:'So'}
+      ];
+      document.getElementById('day-picker-grid').innerHTML = days.map(d =>
+        `<button class="day-picker-btn" data-day="${d.key}">${d.label}</button>`
+      ).join('');
+      modal.classList.add('active');
+      this._resolve = resolve;
+      document.getElementById('day-picker-grid').querySelectorAll('.day-picker-btn').forEach(btn => {
+        btn.onclick = () => { modal.classList.remove('active'); resolve(btn.dataset.day); };
+      });
+    });
+  },
+
+  closeDayPicker() {
+    document.getElementById('modal-day-picker').classList.remove('active');
+    if (this._resolve) { this._resolve(null); this._resolve = null; }
+  }
+};
+
+// ============================================================================
+// BLOCK COLORS
+// ============================================================================
+const BLOCK_COLORS = {
+  'wu-spr':'#4CAF50','ukk':'#2196F3','okk':'#FF9800','ukex':'#E91E63','okex':'#9C27B0',
+  'ukp':'#00BCD4','okp':'#009688','ukiso':'#795548','okiso':'#607D8B','bh1':'#8BC34A',
+  'bh2':'#CDDC39','kv1':'#FFC107','kv2':'#FF5722','praevention':'#3F51B5',
+  'spielen':'#555','match':'#c0392b','frei':'#777'
+};
+
+function getBlockColor(blockId) {
+  return BLOCK_COLORS[blockId] || '#888';
+}
+
+// ============================================================================
+// APP CONTROLLER
+// ============================================================================
+const App = {
+  async init() {
+    await DAL.init();
+    await DataStore.loadAll();
+    this.setupNavigation();
+    this.setupTheme();
+    this.setupWeekInput();
+    await this.refreshDashboard();
+    Planner.init();
+    Players.init();
+    Exercises.init();
+  },
+
+  setupNavigation() {
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => this.showView(tab.dataset.view));
+    });
+  },
+
+  showView(viewId) {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    const tab = document.querySelector(`[data-view="${viewId}"]`);
+    if (tab) tab.classList.add('active');
+    document.getElementById('view-' + viewId).classList.add('active');
+    if (viewId === 'dashboard') this.refreshDashboard();
+    if (viewId === 'players') Players.render();
+    if (viewId === 'exercises') Exercises.render();
+    if (viewId === 'planner') Planner.refresh();
+    if (viewId === 'player-view') PlayerView.init();
+  },
+
+  setupTheme() {
+    const saved = localStorage.getItem('theme') || 'dark';
+    if (saved === 'light') document.documentElement.setAttribute('data-theme','light');
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'light' ? '' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next || 'dark');
+    });
+  },
+
+  setupWeekInput() {
+    const weekInput = document.getElementById('planner-week');
+    const now = new Date();
+    const yr = now.getFullYear();
+    const oneJan = new Date(yr, 0, 1);
+    const wk = Math.ceil(((now - oneJan) / 86400000 + oneJan.getDay() + 1) / 7);
+    weekInput.value = `${yr}-W${String(wk).padStart(2,'0')}`;
+  },
+
+  async refreshDashboard() {
+    const players = await DAL.getAll('players');
+    const plans = await DAL.getAll('weekPlans');
+    const media = await DAL.getAll('media');
+    const allEx = DataStore.getAllExercisesFlat();
+
+    document.getElementById('stat-players').textContent = players.length;
+    document.getElementById('stat-plans').textContent = plans.length;
+    document.getElementById('stat-exercises').textContent = allEx.length;
+    document.getElementById('stat-media').textContent = media.length;
+
+    const dpEl = document.getElementById('dashboard-players');
+    if (players.length === 0) {
+      dpEl.innerHTML = '<div class="empty-state"><div class="empty-state-text" style="font-size:13px">Noch keine Spieler angelegt</div></div>';
+    } else {
+      dpEl.innerHTML = '<table class="data-table"><thead><tr><th>Name</th><th>Level</th></tr></thead><tbody>' +
+        players.slice(0,5).map(p => `<tr><td>${this.esc(p.name)}</td><td><span class="badge badge-level">Level ${p.level}</span></td></tr>`).join('') +
+        '</tbody></table>';
+    }
+
+    const plEl = document.getElementById('dashboard-plans');
+    if (plans.length === 0) {
+      plEl.innerHTML = '<div class="empty-state"><div class="empty-state-text" style="font-size:13px">Noch keine Wochenpläne erstellt</div></div>';
+    } else {
+      plEl.innerHTML = '<table class="data-table"><thead><tr><th>Spieler</th><th>Woche</th><th>RPE</th></tr></thead><tbody>' +
+        plans.slice(-5).reverse().map(pl => {
+          const player = players.find(p => p.id === pl.playerId);
+          return `<tr><td>${player ? this.esc(player.name) : 'Unbekannt'}</td><td>${pl.week||''}</td><td>${pl.totalRPE||0}</td></tr>`;
+        }).join('') +
+        '</tbody></table>';
+    }
+
+    this.updatePlayerSelects(players);
+  },
+
+  updatePlayerSelects(players) {
+    const selects = ['planner-player', 'pv-player'];
+    selects.forEach(id => {
+      const sel = document.getElementById(id);
+      if (!sel) return;
+      const curVal = sel.value;
+      sel.innerHTML = '<option value="">-- Spieler wählen --</option>' +
+        players.map(p => `<option value="${p.id}">${this.esc(p.name)} (Level ${p.level})</option>`).join('');
+      if (curVal) sel.value = curVal;
+    });
+  },
+
+  esc(str) { const d = document.createElement('div'); d.textContent = str||''; return d.innerHTML; }
+};
+
+// ============================================================================
+// PLAYER MANAGEMENT
+// ============================================================================
+const Players = {
+  async init() {},
+
+  async render() {
+    const players = await DAL.getAll('players');
+    const container = document.getElementById('player-list');
+    const search = (document.getElementById('player-search').value || '').toLowerCase();
+
+    const filtered = players.filter(p => !search || p.name.toLowerCase().includes(search));
+
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+        <div class="empty-state-icon">&#128100;</div>
+        <div class="empty-state-text">${search ? 'Keine Spieler gefunden' : 'Noch keine Spieler angelegt'}</div>
+      </div>`;
+      return;
+    }
+
+    container.innerHTML = filtered.map(p => `
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">${App.esc(p.name)}</span>
+          <span class="badge badge-level">Level ${p.level}</span>
+        </div>
+        <div style="font-size:13px;color:var(--text-secondary)">
+          ${p.height ? p.height + ' cm' : ''}${p.height && p.weight ? ' | ' : ''}${p.weight ? p.weight + ' kg' : ''}
+          ${p.dob ? '<br>' + p.dob : ''}
+        </div>
+        ${p.notes ? '<div style="font-size:12px;color:var(--text-secondary);margin-top:6px;font-style:italic">' + App.esc(p.notes) + '</div>' : ''}
+        <div style="margin-top:12px;display:flex;gap:6px">
+          <button class="btn btn-secondary btn-sm" onclick="Players.edit('${p.id}')">Bearbeiten</button>
+          <button class="btn btn-danger btn-sm" onclick="Players.remove('${p.id}')">Löschen</button>
+          <button class="btn btn-primary btn-sm" onclick="App.showView('player-view');document.getElementById('pv-player').value='${p.id}';PlayerView.load()">Plan ansehen</button>
+        </div>
+      </div>
+    `).join('');
+  },
+
+  filter() { this.render(); },
+
+  showAddModal() {
+    document.getElementById('modal-player-title').textContent = 'Spieler anlegen';
+    document.getElementById('player-edit-id').value = '';
+    document.getElementById('player-name').value = '';
+    document.getElementById('player-height').value = '';
+    document.getElementById('player-weight').value = '';
+    document.getElementById('player-level').value = 'A';
+    document.getElementById('player-dob').value = '';
+    document.getElementById('player-notes').value = '';
+    document.getElementById('modal-player').classList.add('active');
+    document.getElementById('player-name').focus();
+  },
+
+  async edit(id) {
+    const p = await DAL.get('players', id);
+    if (!p) return;
+    document.getElementById('modal-player-title').textContent = 'Spieler bearbeiten';
+    document.getElementById('player-edit-id').value = p.id;
+    document.getElementById('player-name').value = p.name;
+    document.getElementById('player-height').value = p.height || '';
+    document.getElementById('player-weight').value = p.weight || '';
+    document.getElementById('player-level').value = p.level;
+    document.getElementById('player-dob').value = p.dob || '';
+    document.getElementById('player-notes').value = p.notes || '';
+    document.getElementById('modal-player').classList.add('active');
+  },
+
+  closeModal() {
+    document.getElementById('modal-player').classList.remove('active');
+  },
+
+  async save() {
+    const name = document.getElementById('player-name').value.trim();
+    if (!name) { showToast('Bitte Namen eingeben', 'error'); return; }
+
+    const editId = document.getElementById('player-edit-id').value;
+    const player = {
+      id: editId || DAL.genId(),
+      name,
+      height: document.getElementById('player-height').value || null,
+      weight: document.getElementById('player-weight').value || null,
+      level: document.getElementById('player-level').value,
+      dob: document.getElementById('player-dob').value || null,
+      notes: document.getElementById('player-notes').value || '',
+      createdAt: editId ? undefined : new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    if (editId) {
+      const existing = await DAL.get('players', editId);
+      if (existing) player.createdAt = existing.createdAt;
+    }
+
+    await DAL.put('players', player);
+    this.closeModal();
+    showToast(editId ? 'Spieler aktualisiert' : 'Spieler angelegt', 'success');
+    this.render();
+    App.refreshDashboard();
+  },
+
+  async remove(id) {
+    const player = await DAL.get('players', id);
+    const ok = await AppDialog.confirm('Spieler löschen', `Soll <strong>${App.esc(player ? player.name : '')}</strong> wirklich gelöscht werden? Alle zugehörigen Wochenpläne bleiben erhalten.`);
+    if (!ok) return;
+    await DAL.delete('players', id);
+    showToast('Spieler gelöscht', 'success');
+    this.render();
+    App.refreshDashboard();
+  }
+};
+
+// ============================================================================
+// WEEKLY PLANNER
+// ============================================================================
+const Planner = {
+  DAYS: ['samstag','sonntag','montag','dienstag','mittwoch','donnerstag','freitag'],
+  DAY_LABELS: {'samstag':'Sa','sonntag':'So','montag':'Mo','dienstag':'Di','mittwoch':'Mi','donnerstag':'Do','freitag':'Fr'},
+  DAY_FULL: {'samstag':'Samstag','sonntag':'Sonntag','montag':'Montag','dienstag':'Dienstag','mittwoch':'Mittwoch','donnerstag':'Donnerstag','freitag':'Freitag'},
+  weekData: {},
+  draggedBlock: null,
+
+  init() {
+    this.weekData = {};
+    this.DAYS.forEach(d => { this.weekData[d] = {blocks:[], intensity:'', type:'training'}; });
+    this.renderPalette();
+    this.renderGrid();
+    this.loadTemplateOptions();
+    document.getElementById('planner-player').addEventListener('change', () => this.loadSavedPlan());
+    document.getElementById('planner-week').addEventListener('change', () => this.loadSavedPlan());
+  },
+
+  renderPalette() {
+    const blocks = DataStore.getBuildingBlocks();
+    const palette = document.getElementById('block-palette');
+
+    const allBlocks = blocks.length > 0
+      ? blocks.map(b => ({id: b.id, code: b.code}))
+      : [
+          {id:'wu-spr',code:'WU Spr'},{id:'ukk',code:'UKK'},{id:'okk',code:'OKK'},
+          {id:'ukex',code:'Ukex'},{id:'okex',code:'Okex'},{id:'ukp',code:'Ukp'},
+          {id:'okp',code:'Okp'},{id:'ukiso',code:'UKiso'},{id:'okiso',code:'OKiso'},
+          {id:'bh1',code:'BH1'},{id:'bh2',code:'BH2'},{id:'kv1',code:'KV1'},
+          {id:'kv2',code:'KV2'},{id:'praevention',code:'Prävention'}
+        ];
+    const extras = [{id:'spielen',code:'Spielen'},{id:'match',code:'Match'},{id:'frei',code:'frei'}];
+
+    palette.innerHTML = [...allBlocks, ...extras].map(b =>
+      `<div class="palette-block" draggable="true" data-block-id="${b.id}" data-block-code="${b.code}" style="background:${getBlockColor(b.id)}">${b.code}</div>`
+    ).join('');
+
+    // Track drag state to distinguish drag from click
+    palette.querySelectorAll('.palette-block').forEach(el => {
+      let isDrag = false;
+      el.addEventListener('dragstart', (e) => {
+        isDrag = true;
+        Planner.draggedBlock = { id: el.dataset.blockId, code: el.dataset.blockCode, fromPalette: true };
+        e.dataTransfer.setData('text/plain', el.dataset.blockId);
+        e.dataTransfer.effectAllowed = 'copy';
+      });
+      el.addEventListener('dragend', () => { setTimeout(() => { isDrag = false; }, 100); });
+      el.addEventListener('click', () => {
+        if (isDrag) return;
+        Planner.quickAdd(el.dataset.blockId, el.dataset.blockCode);
+      });
+    });
+  },
+
+  async quickAdd(blockId, code) {
+    const day = await AppDialog.pickDay(code + ' hinzufügen');
+    if (!day) return;
+    this.addBlockToDay(day, blockId, code);
+  },
+
+  renderGrid() {
+    const grid = document.getElementById('week-grid');
+    grid.innerHTML = this.DAYS.map(day => {
+      const data = this.weekData[day];
+      const intensity = data.intensity || '';
+      let intensityClass = '';
+      if (intensity.includes('4')) intensityClass = 'badge-intensity-4';
+      else if (intensity.includes('3')) intensityClass = 'badge-intensity-3';
+      else if (intensity.includes('2')) intensityClass = 'badge-intensity-2';
+      else if (intensity.includes('1')) intensityClass = 'badge-intensity-1';
+
+      const dayRPE = this.calcDayRPE(day);
+      const dayDuration = this.calcDayDuration(day);
+
+      return `<div class="day-column" data-day="${day}">
+        <div class="day-header">
+          ${this.DAY_FULL[day]}
+          <input type="text" value="${intensity}" onchange="Planner.setIntensity('${day}',this.value)"
+            style="width:35px;text-align:center;background:var(--bg-input);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-size:11px;padding:2px;margin-left:4px"
+            placeholder="--" title="Intensität (z.B. 4+, 3-, 2+)">
+        </div>
+        <div class="day-blocks" data-day="${day}">
+          ${data.blocks.map((b, i) => this.renderBlock(b, day, i)).join('')}
+        </div>
+        <div class="day-footer">
+          <span>${dayDuration} min</span>
+          <span class="rpe-total">RPE: ${dayRPE}</span>
+        </div>
+      </div>`;
+    }).join('');
+
+    const self = this;
+    grid.querySelectorAll('.day-blocks').forEach(el => {
+      el.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = self.draggedBlock && self.draggedBlock.fromPalette ? 'copy' : 'move';
+        el.classList.add('drag-over');
+      });
+      el.addEventListener('dragleave', (e) => {
+        if (!el.contains(e.relatedTarget)) el.classList.remove('drag-over');
+      });
+      el.addEventListener('drop', (e) => {
+        e.preventDefault();
+        el.classList.remove('drag-over');
+        const day = el.dataset.day;
+        if (self.draggedBlock) {
+          if (self.draggedBlock.fromPalette) {
+            self.addBlockToDay(day, self.draggedBlock.id, self.draggedBlock.code);
+          } else {
+            self.moveBlock(self.draggedBlock.fromDay, self.draggedBlock.index, day);
+          }
+          self.draggedBlock = null;
+        }
+      });
+    });
+
+    grid.querySelectorAll('.training-block[draggable="true"]').forEach(el => {
+      el.addEventListener('dragstart', (e) => {
+        self.draggedBlock = { fromDay: el.dataset.day, index: parseInt(el.dataset.index), fromPalette: false };
+        e.dataTransfer.setData('text/plain', 'move');
+        e.dataTransfer.effectAllowed = 'move';
+        el.style.opacity = '0.5';
+      });
+      el.addEventListener('dragend', (e) => { el.style.opacity = '1'; });
+    });
+
+    this.updateWeekTotal();
+  },
+
+  renderBlock(block, day, index) {
+    const color = getBlockColor(block.id);
+    const isSpecial = ['spielen','match','frei'].includes(block.id);
+    return `<div class="training-block" draggable="${!isSpecial}" data-day="${day}" data-index="${index}"
+      style="background:${color}" ondblclick="Planner.showBlockExercises('${day}',${index})">
+      <span>${App.esc(block.code)} <span class="block-info">${block.rpe ? 'RPE:'+block.rpe : ''} ${block.duration ? block.duration+'m' : ''}</span></span>
+      <button class="block-remove" onclick="Planner.removeBlock('${day}',${index})">&#10005;</button>
+    </div>`;
+  },
+
+  addBlockToDay(day, blockId, code) {
+    const blocks = DataStore.getBuildingBlocks();
+    const def = blocks.find(b => b.id === blockId);
+    const playerSel = document.getElementById('planner-player');
+    const player = playerSel.value;
+    let duration = 10, rpe = 3;
+
+    if (def) {
+      rpe = def.defaultRPE || 3;
+      if (typeof def.defaultDuration === 'object') {
+        duration = def.defaultDuration['1-6'] || 20;
+      } else {
+        duration = def.defaultDuration || 10;
+      }
+    } else {
+      const hardcoded = {
+        'wu-spr':{rpe:5,dur:30},'ukk':{rpe:6,dur:20},'okk':{rpe:6,dur:20},
+        'ukex':{rpe:4,dur:10},'okex':{rpe:4,dur:10},'ukp':{rpe:4,dur:15},
+        'okp':{rpe:4,dur:15},'ukiso':{rpe:5,dur:10},'okiso':{rpe:4,dur:10},
+        'bh1':{rpe:3,dur:10},'bh2':{rpe:3,dur:10},'kv1':{rpe:1,dur:10},
+        'kv2':{rpe:2,dur:10},'praevention':{rpe:2,dur:10},
+        'spielen':{rpe:0,dur:0},'match':{rpe:0,dur:0},'frei':{rpe:0,dur:0}
+      };
+      const hc = hardcoded[blockId];
+      if (hc) { rpe = hc.rpe; duration = hc.dur; }
+    }
+
+    this.weekData[day].blocks.push({ id: blockId, code: code, rpe, duration });
+    this.renderGrid();
+  },
+
+  removeBlock(day, index) {
+    this.weekData[day].blocks.splice(index, 1);
+    this.renderGrid();
+  },
+
+  moveBlock(fromDay, fromIndex, toDay) {
+    const block = this.weekData[fromDay].blocks.splice(fromIndex, 1)[0];
+    if (block) {
+      this.weekData[toDay].blocks.push(block);
+      this.renderGrid();
+    }
+  },
+
+  setIntensity(day, value) {
+    this.weekData[day].intensity = value;
+  },
+
+  calcDayRPE(day) {
+    return this.weekData[day].blocks.reduce((sum, b) => sum + ((b.rpe||0) * (b.duration||0)), 0);
+  },
+
+  calcDayDuration(day) {
+    return this.weekData[day].blocks.reduce((sum, b) => sum + (b.duration||0), 0);
+  },
+
+  updateWeekTotal() {
+    let total = 0;
+    this.DAYS.forEach(d => { total += this.calcDayRPE(d); });
+    document.getElementById('week-total-rpe').textContent = 'RPE: ' + total;
+  },
+
+  loadTemplateOptions() {
+    const sel = document.getElementById('planner-template');
+    const templates = DataStore.getTemplates();
+    sel.innerHTML = '<option value="">-- Template laden --</option>' +
+      templates.map((t,i) => `<option value="${i}">${App.esc(t.name)} (${t.levelRange})</option>`).join('');
+  },
+
+  async loadTemplate() {
+    const sel = document.getElementById('planner-template');
+    const idx = sel.value;
+    if (idx === '') { showToast('Bitte Template wählen', 'error'); return; }
+    const templates = DataStore.getTemplates();
+    const tmpl = templates[parseInt(idx)];
+    if (!tmpl || !tmpl.weeks || !tmpl.weeks[0]) return;
+
+    let weekIdx = 0;
+    if (tmpl.weeks.length > 1) {
+      const options = tmpl.weeks.map((w, i) => ({
+        label: `Woche ${i+1}` + (w.totalRPE ? ` (RPE: ${w.totalRPE})` : ''),
+        value: i
+      }));
+      const picked = await AppDialog.pickOption('Woche auswählen – ' + tmpl.name, options);
+      if (picked === null) return;
+      weekIdx = picked;
+    }
+
+    const week = tmpl.weeks[weekIdx];
+    this._applyTemplate(week, tmpl.name, weekIdx);
+  },
+
+  _applyTemplate(week, name, weekIdx) {
+    this.DAYS.forEach(day => {
+      const dayData = week.days[day];
+      if (dayData) {
+        const specialTypes = ['spielen','match','frei'];
+        if (specialTypes.includes(dayData.type)) {
+          const typeLabel = {spielen:'Spielen',match:'Match',frei:'frei'};
+          this.weekData[day] = {
+            blocks: [{id:dayData.type, code:typeLabel[dayData.type]||dayData.type, rpe:0, duration:0}],
+            intensity: dayData.intensity || '',
+            type: dayData.type
+          };
+        } else {
+          this.weekData[day] = {
+            blocks: (dayData.blocks || []).map(b => {
+              const def = DataStore.getBuildingBlocks().find(bb => bb.id === b.blockId);
+              return { id: b.blockId, code: def ? def.code : b.blockId, rpe: b.rpe, duration: b.duration };
+            }),
+            intensity: dayData.intensity || '',
+            type: dayData.type || 'training'
+          };
+        }
+      } else {
+        this.weekData[day] = {blocks:[], intensity:'', type:'training'};
+      }
+    });
+    this.renderGrid();
+    showToast('Template "' + name + '" (Woche ' + (weekIdx+1) + ') geladen', 'success');
+  },
+
+  async clearWeek() {
+    const hasBlocks = this.DAYS.some(d => this.weekData[d].blocks.length > 0);
+    if (hasBlocks) {
+      const ok = await AppDialog.confirm('Wochenplan leeren', 'Alle Bausteine aus dem aktuellen Wochenplan entfernen?');
+      if (!ok) return;
+    }
+    this.DAYS.forEach(d => { this.weekData[d] = {blocks:[], intensity:'', type:'training'}; });
+    this.renderGrid();
+    showToast('Wochenplan geleert', 'info');
+  },
+
+  async savePlan() {
+    const playerId = document.getElementById('planner-player').value;
+    const week = document.getElementById('planner-week').value;
+
+    if (!playerId) { showToast('Bitte Spieler auswählen', 'error'); return; }
+
+    let totalRPE = 0;
+    this.DAYS.forEach(d => { totalRPE += this.calcDayRPE(d); });
+
+    const plan = {
+      id: playerId + '_' + week,
+      playerId,
+      week,
+      days: JSON.parse(JSON.stringify(this.weekData)),
+      totalRPE,
+      createdAt: new Date().toISOString()
+    };
+
+    await DAL.put('weekPlans', plan);
+    showToast('Wochenplan gespeichert', 'success');
+    App.refreshDashboard();
+  },
+
+  refresh() {
+    this.loadTemplateOptions();
+    this.renderGrid();
+    this.loadSavedPlan();
+  },
+
+  async loadSavedPlan() {
+    const playerId = document.getElementById('planner-player').value;
+    const week = document.getElementById('planner-week').value;
+    if (!playerId || !week) return;
+
+    const plan = await DAL.get('weekPlans', playerId + '_' + week);
+    if (plan && plan.days) {
+      this.weekData = plan.days;
+      this.renderGrid();
+    }
+  },
+
+  async showBlockExercises(day, index) {
+    const block = this.weekData[day].blocks[index];
+    if (!block || ['spielen','match','frei'].includes(block.id)) return;
+
+    const playerId = document.getElementById('planner-player').value;
+    let level = '1';
+    if (playerId) {
+      const player = await DAL.get('players', playerId);
+      if (player) level = player.level;
+    }
+
+    const blockMap = {
+      'ukk': {bodyPart:'lowerBody', blocks:['strengthA','strengthB']},
+      'okk': {bodyPart:'upperBody', blocks:['strengthA','strengthB']},
+      'ukex': {bodyPart:'lowerBody', blocks:['explosiv']},
+      'okex': {bodyPart:'upperBody', blocks:['explosiv']},
+      'ukiso': {bodyPart:'lowerBody', blocks:['isometrics']},
+      'okiso': {bodyPart:'upperBody', blocks:['isometrics']},
+      'ukp': {bodyPart:'lowerBody', blocks:['strengthB']},
+      'okp': {bodyPart:'upperBody', blocks:['strengthB']}
+    };
+
+    const mapping = blockMap[block.id];
+    if (!mapping) { showToast('Keine Übungen für diesen Baustein', 'info'); return; }
+
+    const plan = DataStore.getExercisesForLevel(level, mapping.bodyPart);
+    if (!plan) { showToast('Keine Übungen für Level ' + level, 'info'); return; }
+
+    let exercises = [];
+    mapping.blocks.forEach(bk => {
+      if (plan[bk]) exercises = exercises.concat(plan[bk]);
+    });
+
+    const modal = document.getElementById('modal-block-detail');
+    document.getElementById('block-detail-title').textContent = block.code + ' - Level ' + level;
+    document.getElementById('block-detail-content').innerHTML = exercises.length === 0
+      ? '<p style="color:var(--text-secondary)">Keine Übungen gefunden</p>'
+      : exercises.map(ex => `
+        <div class="exercise-card">
+          <div class="exercise-name" style="cursor:pointer" onclick="Exercises.showDetail('${ex.id||''}')">${ex.order||''}. ${App.esc(ex.name)}</div>
+          <div class="exercise-details">
+            <div class="detail-item"><div class="detail-label">Tempo</div><div class="detail-value">${ex.tempo||ex.defaultRPE||'-'}</div></div>
+            <div class="detail-item"><div class="detail-label">RPE</div><div class="detail-value">${ex.defaultRPE||'-'}</div></div>
+            <div class="detail-item"><div class="detail-label">SxR</div><div class="detail-value">${ex.defaultSxR||'-'}</div></div>
+            <div class="detail-item"><div class="detail-label">Gewicht</div><div class="detail-value">${ex.defaultWeight||'-'}</div></div>
+          </div>
+        </div>
+      `).join('');
+
+    modal.classList.add('active');
+  }
+};
+
+// ============================================================================
+// EXERCISE LIBRARY
+// ============================================================================
+const Exercises = {
+  init() {},
+
+  render() {
+    this.filter();
+    this.filterProgressions();
+  },
+
+  showSubTab(tab, btn) {
+    document.querySelectorAll('#view-exercises .sub-tab').forEach(t => t.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    document.getElementById('exercises-list-tab').style.display = tab === 'list' ? '' : 'none';
+    document.getElementById('exercises-progressions-tab').style.display = tab === 'progressions' ? '' : 'none';
+  },
+
+  filter() {
+    const level = document.getElementById('ex-filter-level').value;
+    const body = document.getElementById('ex-filter-body').value;
+    const block = document.getElementById('ex-filter-block').value;
+    const search = (document.getElementById('ex-search').value || '').toLowerCase();
+
+    let exercises = DataStore.getAllExercisesFlat();
+    if (level) exercises = exercises.filter(e => e.level === level);
+    if (body) exercises = exercises.filter(e => e.bodyPart === body);
+    if (block) exercises = exercises.filter(e => e.block === block);
+    if (search) exercises = exercises.filter(e => e.name.toLowerCase().includes(search));
+
+    const container = document.getElementById('exercise-list-content');
+    if (exercises.length === 0) {
+      container.innerHTML = '<div class="empty-state"><div class="empty-state-text">Keine Übungen gefunden</div></div>';
+      return;
+    }
+
+    const grouped = {};
+    exercises.forEach(ex => {
+      const key = `Level ${ex.level} - ${ex.bodyPart === 'lowerBody' ? 'Unterkörper' : 'Oberkörper'}`;
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(ex);
+    });
+
+    container.innerHTML = Object.entries(grouped).map(([group, exs]) => `
+      <div class="card">
+        <div class="card-title" style="margin-bottom:8px">${group}</div>
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Übung</th><th>Block</th><th>RPE</th><th>SxR</th></tr></thead>
+          <tbody>
+            ${exs.map(ex => `<tr style="cursor:pointer" onclick="Exercises.showDetail('${ex.id||''}')">
+              <td>${ex.order||''}</td>
+              <td>${App.esc(ex.name)}</td>
+              <td><span class="badge" style="background:var(--bg-input)">${ex.block}</span></td>
+              <td>${ex.defaultRPE||ex.tempo||'-'}</td>
+              <td>${ex.defaultSxR||'-'}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    `).join('');
+  },
+
+  filterProgressions() {
+    const body = document.getElementById('prog-filter-body').value;
+    const progs = DataStore.getProgressions();
+    const warmup = DataStore.getWarmup();
+    const container = document.getElementById('progression-list-content');
+
+    let allProgs = [];
+    if (!body || body === 'lowerBody') {
+      (progs.lowerBody || []).forEach(p => allProgs.push({...p, source:'Unterkörper'}));
+    }
+    if (!body || body === 'upperBody') {
+      (progs.upperBody || []).forEach(p => allProgs.push({...p, source:'Oberkörper'}));
+    }
+    if (!body) {
+      (warmup.categories || []).forEach(p => allProgs.push({...p, source:'Warm-Up'}));
+    }
+
+    if (allProgs.length === 0) {
+      container.innerHTML = '<div class="empty-state"><div class="empty-state-text">Keine Progressionen gefunden</div></div>';
+      return;
+    }
+
+    container.innerHTML = allProgs.map(prog => `
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">${App.esc(prog.name || prog.fullName || prog.id)}</span>
+          <span class="badge" style="background:var(--bg-input)">${prog.source}</span>
+        </div>
+        <div class="progression-chain">
+          ${(prog.levels || []).map((l, i) => `
+            <span class="progression-step">${l.level}: ${App.esc(l.exercise)}</span>
+            ${i < prog.levels.length - 1 ? '<span class="progression-arrow">&#8594;</span>' : ''}
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  },
+
+  async showDetail(exId) {
+    if (!exId) return;
+    const allEx = DataStore.getAllExercisesFlat();
+    const ex = allEx.find(e => e.id === exId);
+    if (!ex) return;
+
+    document.getElementById('ex-detail-title').textContent = ex.name;
+    document.getElementById('ex-detail-content').innerHTML = `
+      <div style="margin-bottom:12px">
+        <span class="badge badge-level">Level ${ex.level}</span>
+        <span class="badge" style="background:var(--bg-input);margin-left:4px">${ex.bodyPart === 'lowerBody' ? 'Unterkörper' : 'Oberkörper'}</span>
+        <span class="badge" style="background:var(--bg-input);margin-left:4px">${ex.block}</span>
+      </div>
+      <div class="exercise-details" style="margin-bottom:16px">
+        <div class="detail-item"><div class="detail-label">Tempo</div><div class="detail-value">${ex.tempo||ex.defaultRPE||'-'}</div></div>
+        <div class="detail-item"><div class="detail-label">RPE</div><div class="detail-value">${ex.defaultRPE||'-'}</div></div>
+        <div class="detail-item"><div class="detail-label">SxR</div><div class="detail-value">${ex.defaultSxR||'-'}</div></div>
+        <div class="detail-item"><div class="detail-label">Gewicht</div><div class="detail-value">${ex.defaultWeight||'-'}</div></div>
+      </div>
+      <div style="margin-bottom:12px">
+        <h4 style="color:var(--text-heading);margin-bottom:8px">Medien</h4>
+        <div class="media-upload" onclick="Exercises.uploadMedia('${exId}')">
+          <div style="font-size:24px">&#128247;</div>
+          <div>Klicken um Video/Foto hochzuladen</div>
+        </div>
+        <input type="file" id="media-file-input" accept="image/*,video/*" style="display:none" onchange="Exercises.handleMediaUpload('${exId}')">
+        <div id="ex-media-container"></div>
+      </div>
+    `;
+
+    await this.loadMedia(exId);
+    document.getElementById('modal-exercise-detail').classList.add('active');
+  },
+
+  closeDetail() {
+    document.getElementById('modal-exercise-detail').classList.remove('active');
+  },
+
+  uploadMedia(exId) {
+    document.getElementById('media-file-input').click();
+  },
+
+  async handleMediaUpload(exId) {
+    const input = document.getElementById('media-file-input');
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const media = {
+        id: exId + '_' + DAL.genId(),
+        exerciseId: exId,
+        type: file.type.startsWith('video') ? 'video' : 'image',
+        data: e.target.result,
+        name: file.name,
+        createdAt: new Date().toISOString()
+      };
+      await DAL.put('media', media);
+      showToast('Medium hochgeladen', 'success');
+      await this.loadMedia(exId);
+      App.refreshDashboard();
+    };
+    reader.readAsDataURL(file);
+    input.value = '';
+  },
+
+  async loadMedia(exId) {
+    const allMedia = await DAL.getAll('media');
+    const mediaForEx = allMedia.filter(m => m.exerciseId === exId);
+    const container = document.getElementById('ex-media-container');
+    if (!container) return;
+
+    if (mediaForEx.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+
+    container.innerHTML = mediaForEx.map(m => {
+      if (m.type === 'video') {
+        return `<div class="media-preview" style="margin-top:8px">
+          <video controls src="${m.data}" style="max-width:100%;border-radius:var(--radius)"></video>
+          <button class="btn btn-danger btn-sm" style="margin-top:4px" onclick="Exercises.deleteMedia('${m.id}','${exId}')">Löschen</button>
+        </div>`;
+      } else {
+        return `<div class="media-preview" style="margin-top:8px">
+          <img src="${m.data}" style="max-width:100%;border-radius:var(--radius)">
+          <button class="btn btn-danger btn-sm" style="margin-top:4px" onclick="Exercises.deleteMedia('${m.id}','${exId}')">Löschen</button>
+        </div>`;
+      }
+    }).join('');
+  },
+
+  async deleteMedia(mediaId, exId) {
+    await DAL.delete('media', mediaId);
+    showToast('Medium gelöscht', 'success');
+    await this.loadMedia(exId);
+    App.refreshDashboard();
+  }
+};
+
+// ============================================================================
+// PLAYER VIEW
+// ============================================================================
+const PlayerView = {
+  async init() {
+    const players = await DAL.getAll('players');
+    App.updatePlayerSelects(players);
+  },
+
+  async load() {
+    const playerId = document.getElementById('pv-player').value;
+    const container = document.getElementById('player-view-content');
+
+    if (!playerId) {
+      container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128100;</div><div class="empty-state-text">Bitte einen Spieler auswählen</div></div>';
+      return;
+    }
+
+    const player = await DAL.get('players', playerId);
+    if (!player) return;
+
+    const plans = await DAL.getAll('weekPlans');
+    const playerPlans = plans.filter(p => p.playerId === playerId).sort((a,b) => (b.week||'').localeCompare(a.week||''));
+
+    let html = `
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">${App.esc(player.name)}</span>
+          <span class="badge badge-level">Level ${player.level}</span>
+        </div>
+        <div style="font-size:13px;color:var(--text-secondary)">
+          ${player.height ? player.height + ' cm' : ''}${player.height && player.weight ? ' | ' : ''}${player.weight ? player.weight + ' kg' : ''}
+        </div>
+      </div>
+    `;
+
+    if (playerPlans.length === 0) {
+      html += '<div class="empty-state"><div class="empty-state-text">Noch kein Wochenplan zugewiesen</div></div>';
+    } else {
+      const latestPlan = playerPlans[0];
+      html += `<h3 style="color:var(--text-heading);margin-bottom:12px">Aktueller Wochenplan (${latestPlan.week || 'Unbekannt'})</h3>`;
+      html += '<div class="week-grid" style="margin-bottom:16px">';
+
+      Planner.DAYS.forEach(day => {
+        const dayData = latestPlan.days[day];
+        if (!dayData) {
+          html += `<div class="day-column"><div class="day-header">${Planner.DAY_FULL[day]}</div><div class="day-blocks"></div></div>`;
+          return;
+        }
+        html += `<div class="day-column">
+          <div class="day-header">${Planner.DAY_FULL[day]} ${dayData.intensity ? '<span style="font-size:11px;opacity:0.7">'+dayData.intensity+'</span>':''}</div>
+          <div class="day-blocks">
+            ${(dayData.blocks||[]).map(b => `
+              <div class="training-block" style="background:${getBlockColor(b.id)};cursor:pointer"
+                onclick="PlayerView.showBlockDetail('${player.level}','${b.id}','${b.code}')">
+                <span>${App.esc(b.code)} <span class="block-info">${b.duration?b.duration+'m':''}</span></span>
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+      });
+
+      html += '</div>';
+
+      if (playerPlans.length > 1) {
+        html += `<div class="card"><div class="card-title" style="margin-bottom:8px">Ältere Pläne</div>
+          <table class="data-table"><thead><tr><th>Woche</th><th>RPE</th></tr></thead><tbody>
+          ${playerPlans.slice(1).map(p => `<tr><td>${p.week||''}</td><td>${p.totalRPE||0}</td></tr>`).join('')}
+          </tbody></table></div>`;
+      }
+    }
+
+    container.innerHTML = html;
+  },
+
+  async showBlockDetail(level, blockId, code) {
+    const blockMap = {
+      'ukk': {bodyPart:'lowerBody', blocks:['strengthA','strengthB']},
+      'okk': {bodyPart:'upperBody', blocks:['strengthA','strengthB']},
+      'ukex': {bodyPart:'lowerBody', blocks:['explosiv']},
+      'okex': {bodyPart:'upperBody', blocks:['explosiv']},
+      'ukiso': {bodyPart:'lowerBody', blocks:['isometrics']},
+      'okiso': {bodyPart:'upperBody', blocks:['isometrics']},
+      'ukp': {bodyPart:'lowerBody', blocks:['strengthB']},
+      'okp': {bodyPart:'upperBody', blocks:['strengthB']},
+      'wu-spr': null, 'bh1':null, 'bh2':null, 'kv1':null, 'kv2':null, 'praevention':null
+    };
+
+    const mapping = blockMap[blockId];
+    if (!mapping) { showToast(code + ': Kein Übungsdetail verfügbar', 'info'); return; }
+
+    const plan = DataStore.getExercisesForLevel(level, mapping.bodyPart);
+    if (!plan) { showToast('Keine Übungen für Level ' + level, 'info'); return; }
+
+    let exercises = [];
+    mapping.blocks.forEach(bk => {
+      if (plan[bk]) exercises = exercises.concat(plan[bk]);
+    });
+
+    const playerId = document.getElementById('pv-player').value;
+    const logKey = playerId + '_' + blockId + '_' + level;
+    const savedLog = await DAL.get('playerLogs', logKey);
+    const logData = savedLog ? savedLog.entries : {};
+
+    const modal = document.getElementById('modal-block-detail');
+    document.getElementById('block-detail-title').textContent = code + ' - Level ' + level;
+    document.getElementById('block-detail-content').innerHTML = exercises.length === 0
+      ? '<p style="color:var(--text-secondary)">Keine Übungen gefunden</p>'
+      : exercises.map(ex => `
+        <div class="exercise-card">
+          <div class="exercise-name">${ex.order||''}. ${App.esc(ex.name)}</div>
+          <div class="exercise-details">
+            <div class="detail-item"><div class="detail-label">RPE</div><div class="detail-value">${ex.defaultRPE||ex.tempo||'-'}</div></div>
+            <div class="detail-item"><div class="detail-label">SxR</div><div class="detail-value">${ex.defaultSxR||'-'}</div></div>
+            <div class="detail-item">
+              <div class="detail-label">Gewicht</div>
+              <input class="weight-input" type="text" placeholder="${ex.defaultWeight||'-'}"
+                value="${logData[ex.id]?.weight||''}" data-ex-id="${ex.id}" onchange="PlayerView.saveWeight(this)">
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Notiz</div>
+              <input class="weight-input" type="text" style="width:120px" placeholder="..."
+                value="${logData[ex.id]?.note||''}" data-ex-id="${ex.id}" data-field="note" onchange="PlayerView.saveWeight(this)">
+            </div>
+          </div>
+        </div>
+      `).join('') +
+      `<button class="btn btn-primary btn-block" style="margin-top:12px" onclick="PlayerView.saveLog('${logKey}')">Einträge speichern</button>`;
+
+    modal.classList.add('active');
+  },
+
+  saveWeight(input) {
+    // Values are collected on save
+  },
+
+  async saveLog(logKey) {
+    const modal = document.getElementById('block-detail-content');
+    const entries = {};
+    modal.querySelectorAll('.weight-input').forEach(input => {
+      const exId = input.dataset.exId;
+      const field = input.dataset.field || 'weight';
+      if (!entries[exId]) entries[exId] = {};
+      entries[exId][field] = input.value;
+    });
+
+    await DAL.put('playerLogs', { id: logKey, entries, updatedAt: new Date().toISOString() });
+    showToast('Einträge gespeichert', 'success');
+  }
+};
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  App.init().then(() => {
+    console.log('Krafttraining App initialized');
+  }).catch(err => {
+    console.error('Init error:', err);
+    showToast('Fehler beim Laden der App', 'error');
+  });
+});
+</script>
+</body>
+</html>

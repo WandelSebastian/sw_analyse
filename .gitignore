@@ -1,0 +1,15 @@
+# Temp files
+~$*
+*.tmp
+
+# Audio files
+*.m4a
+
+# Claude Code
+.claude/
+
+# Node modules (if re-installed)
+node_modules/
+
+# Media uploads (stored in IndexedDB, not files)
+media/
