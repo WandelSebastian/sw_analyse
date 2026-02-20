@@ -625,6 +625,72 @@ body {
   margin: 8px 0 16px;
   line-height: 1.5;
 }
+/* TIMER */
+.timer-section {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.timer-display {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 4px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin: 8px 0;
+}
+.timer-display.warning { color: var(--warning); }
+.timer-display.danger { color: var(--danger); }
+.timer-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+.timer-total {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.timer-progress-wrap {
+  background: var(--border);
+  border-radius: 4px;
+  height: 8px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+.timer-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.8s linear;
+  width: 0%;
+}
+.timer-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.timer-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  margin-left: 4px;
+}
+.timer-badge.running { background: var(--success); animation: pulse 1.5s ease-in-out infinite; }
+.timer-badge.paused { background: var(--warning); color: #000; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
 </style>
 </head>
 <body>
@@ -1953,9 +2019,11 @@ const PlayerView = {
           <div class="day-header">${Planner.DAY_FULL[day]} ${dayData.intensity ? '<span style="font-size:11px;opacity:0.7">'+dayData.intensity+'</span>':''}</div>
           <div class="day-blocks">
             ${(dayData.blocks||[]).map(b => `
-              <div class="training-block" style="background:${getBlockColor(b.id)};cursor:pointer"
-                onclick="PlayerView.showBlockDetail('${player.level}','${b.id}','${b.code}')">
+              <div class="training-block" data-timer-key="${player.level}_${b.id}"
+                style="background:${getBlockColor(b.id)};cursor:pointer"
+                onclick="PlayerView.showBlockDetail('${player.level}','${b.id}','${b.code}',${b.duration||0})">
                 <span>${App.esc(b.code)} <span class="block-info">${b.duration?b.duration+'m':''}</span></span>
+                <span class="timer-badge-container"></span>
               </div>
             `).join('')}
           </div>
@@ -1973,9 +2041,10 @@ const PlayerView = {
     }
 
     container.innerHTML = html;
+    this._refreshBlockBadges();
   },
 
-  async showBlockDetail(level, blockId, code) {
+  async showBlockDetail(level, blockId, code, duration) {
     const blockMap = {
       'ukk': {bodyPart:'lowerBody', blocks:['strengthA','strengthB']},
       'okk': {bodyPart:'upperBody', blocks:['strengthA','strengthB']},
@@ -2006,7 +2075,27 @@ const PlayerView = {
 
     const modal = document.getElementById('modal-block-detail');
     document.getElementById('block-detail-title').textContent = code + ' - Level ' + level;
-    document.getElementById('block-detail-content').innerHTML = exercises.length === 0
+    const dur = duration || 0;
+    const timerState = dur > 0 ? ExerciseTimer.getOrCreate(level, blockId, dur) : null;
+    const timerHtml = timerState ? `
+      <div class="timer-section">
+        <div class="timer-label">Verbleibende Trainingszeit</div>
+        <div class="timer-display" id="timer-remaining" data-level="${level}" data-block-id="${blockId}">${ExerciseTimer.format(timerState.remaining)}</div>
+        <div class="timer-total">Gesamt: ${ExerciseTimer.format(timerState.total)}</div>
+        <div class="timer-progress-wrap">
+          <div class="timer-progress-bar" id="timer-progress-bar" style="width:${timerState.total > 0 ? ((1 - timerState.remaining / timerState.total) * 100).toFixed(1) : 0}%"></div>
+        </div>
+        <div class="timer-controls">
+          <button class="btn ${timerState.running ? 'btn-secondary' : 'btn-primary'}" id="timer-start-btn"
+            onclick="ExerciseTimer.toggle('${level}','${blockId}',${dur})">
+            ${timerState.running ? '\u23f8 Pause' : (timerState.remaining < timerState.total && timerState.remaining > 0 ? '\u25b6 Weiter' : '\u25b6 Start')}
+          </button>
+          <button class="btn btn-danger" onclick="ExerciseTimer.stop('${level}','${blockId}')">&#9632; Beenden</button>
+        </div>
+      </div>
+    ` : '';
+
+    document.getElementById('block-detail-content').innerHTML = timerHtml + (exercises.length === 0
       ? '<p style="color:var(--text-secondary)">Keine Übungen gefunden</p>'
       : exercises.map(ex => `
         <div class="exercise-card">
@@ -2027,9 +2116,10 @@ const PlayerView = {
           </div>
         </div>
       `).join('') +
-      `<button class="btn btn-primary btn-block" style="margin-top:12px" onclick="PlayerView.saveLog('${logKey}')">Einträge speichern</button>`;
+      `<button class="btn btn-primary btn-block" style="margin-top:12px" onclick="PlayerView.saveLog('${logKey}')">Einträge speichern</button>`);
 
     modal.classList.add('active');
+    if (timerState) ExerciseTimer._updateDisplay();
   },
 
   saveWeight(input) {
@@ -2048,6 +2138,138 @@ const PlayerView = {
 
     await DAL.put('playerLogs', { id: logKey, entries, updatedAt: new Date().toISOString() });
     showToast('Einträge gespeichert', 'success');
+  },
+
+  _refreshBlockBadges() {
+    document.querySelectorAll('[data-timer-key]').forEach(el => {
+      const key = el.dataset.timerKey;
+      const s = ExerciseTimer.states[key];
+      const container = el.querySelector('.timer-badge-container');
+      if (!container) return;
+      if (s) {
+        const cls = s.running ? 'running' : 'paused';
+        const label = s.running ? '\u23f1 ' + ExerciseTimer.format(s.remaining) : '\u23f8 ' + ExerciseTimer.format(s.remaining);
+        container.innerHTML = '<span class="timer-badge ' + cls + '">' + label + '</span>';
+      } else {
+        container.innerHTML = '';
+      }
+    });
+  }
+};
+
+// ============================================================================
+// EXERCISE TIMER
+// ============================================================================
+const ExerciseTimer = {
+  states: {}, // key: "level_blockId" -> { remaining, total, running, intervalId, level, blockId }
+
+  _key(level, blockId) { return level + '_' + blockId; },
+
+  get(level, blockId) {
+    return this.states[this._key(level, blockId)] || null;
+  },
+
+  getOrCreate(level, blockId, durationMinutes) {
+    const key = this._key(level, blockId);
+    if (!this.states[key]) {
+      this.states[key] = {
+        remaining: durationMinutes * 60,
+        total: durationMinutes * 60,
+        running: false,
+        intervalId: null,
+        level,
+        blockId
+      };
+    }
+    return this.states[key];
+  },
+
+  toggle(level, blockId, durationMinutes) {
+    const s = this.getOrCreate(level, blockId, durationMinutes);
+    if (s.remaining <= 0) {
+      s.remaining = s.total;
+    }
+    if (s.running) {
+      this._doPause(s);
+    } else {
+      for (const k of Object.keys(this.states)) {
+        if (k !== this._key(level, blockId) && this.states[k].running) {
+          this._doPause(this.states[k]);
+        }
+      }
+      s.running = true;
+      s.intervalId = setInterval(() => this._tick(level, blockId), 1000);
+    }
+    this._updateDisplay();
+    PlayerView._refreshBlockBadges();
+  },
+
+  stop(level, blockId) {
+    const key = this._key(level, blockId);
+    const s = this.states[key];
+    if (s) {
+      if (s.intervalId) clearInterval(s.intervalId);
+      delete this.states[key];
+    }
+    this._updateDisplay();
+    PlayerView._refreshBlockBadges();
+  },
+
+  _doPause(state) {
+    state.running = false;
+    if (state.intervalId) { clearInterval(state.intervalId); state.intervalId = null; }
+  },
+
+  _tick(level, blockId) {
+    const s = this.states[this._key(level, blockId)];
+    if (!s) return;
+    s.remaining = Math.max(0, s.remaining - 1);
+    if (s.remaining === 0) {
+      this._doPause(s);
+      showToast('Zeit abgelaufen! \u00dcbung beendet.', 'success');
+    }
+    this._updateDisplay();
+    PlayerView._refreshBlockBadges();
+  },
+
+  _updateDisplay() {
+    const timerEl = document.getElementById('timer-remaining');
+    if (!timerEl) return;
+    const level = timerEl.dataset.level;
+    const blockId = timerEl.dataset.blockId;
+    const s = this.states[this._key(level, blockId)];
+
+    if (!s) {
+      timerEl.textContent = '--:--';
+      timerEl.className = 'timer-display';
+      const bar = document.getElementById('timer-progress-bar');
+      if (bar) bar.style.width = '0%';
+      const btn = document.getElementById('timer-start-btn');
+      if (btn) btn.textContent = '\u25b6 Start';
+      return;
+    }
+
+    timerEl.textContent = this.format(s.remaining);
+    const pct = s.total > 0 ? s.remaining / s.total : 1;
+    timerEl.className = 'timer-display' + (pct < 0.1 ? ' danger' : pct < 0.25 ? ' warning' : '');
+
+    const bar = document.getElementById('timer-progress-bar');
+    if (bar && s.total > 0) {
+      bar.style.width = ((1 - s.remaining / s.total) * 100).toFixed(1) + '%';
+      bar.style.background = pct < 0.1 ? 'var(--danger)' : pct < 0.25 ? 'var(--warning)' : 'var(--accent)';
+    }
+
+    const btn = document.getElementById('timer-start-btn');
+    if (btn) {
+      btn.textContent = s.running ? '\u23f8 Pause' : (s.remaining < s.total && s.remaining > 0 ? '\u25b6 Weiter' : '\u25b6 Start');
+      btn.className = 'btn ' + (s.running ? 'btn-secondary' : 'btn-primary');
+    }
+  },
+
+  format(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
   }
 };
 

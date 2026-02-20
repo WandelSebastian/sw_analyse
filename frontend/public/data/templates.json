@@ -1,0 +1,1290 @@
+{
+  "buildingBlocks": [
+    {
+      "id": "wu-spr",
+      "code": "WU Spr",
+      "name": "Warm-Up Sprung",
+      "fullName": "Warm-Up Jump/Sprint Preparation",
+      "defaultRPE": 5,
+      "defaultDuration": 30,
+      "color": "#4CAF50",
+      "category": "warmup"
+    },
+    {
+      "id": "ukk",
+      "code": "UKK",
+      "name": "Unterkörper Kraft",
+      "fullName": "Lower Body Strength",
+      "defaultRPE": 6,
+      "defaultDuration": { "1-6": 20, "7-9": 45 },
+      "color": "#2196F3",
+      "category": "strength"
+    },
+    {
+      "id": "okk",
+      "code": "OKK",
+      "name": "Oberkörper Kraft",
+      "fullName": "Upper Body Strength",
+      "defaultRPE": 6,
+      "defaultDuration": { "1-6": 20, "7-9": 45 },
+      "color": "#FF9800",
+      "category": "strength"
+    },
+    {
+      "id": "ukex",
+      "code": "Ukex",
+      "name": "Unterkörper Explosiv",
+      "fullName": "Lower Body Explosive",
+      "defaultRPE": 4,
+      "defaultDuration": 10,
+      "color": "#E91E63",
+      "category": "explosive"
+    },
+    {
+      "id": "okex",
+      "code": "Okex",
+      "name": "Oberkörper Explosiv",
+      "fullName": "Upper Body Explosive",
+      "defaultRPE": 4,
+      "defaultDuration": 10,
+      "color": "#9C27B0",
+      "category": "explosive"
+    },
+    {
+      "id": "ukp",
+      "code": "Ukp",
+      "name": "Unterkörper Prävention",
+      "fullName": "Lower Body Prevention",
+      "defaultRPE": 4,
+      "defaultDuration": { "1-6": 15, "7-9": 25 },
+      "color": "#00BCD4",
+      "category": "prevention"
+    },
+    {
+      "id": "okp",
+      "code": "Okp",
+      "name": "Oberkörper Prävention",
+      "fullName": "Upper Body Prevention",
+      "defaultRPE": 4,
+      "defaultDuration": { "1-6": 15, "7-9": 25 },
+      "color": "#009688",
+      "category": "prevention"
+    },
+    {
+      "id": "ukiso",
+      "code": "UKiso",
+      "name": "Unterkörper Isometrics",
+      "fullName": "Lower Body Isometrics",
+      "defaultRPE": 5,
+      "defaultDuration": 10,
+      "color": "#795548",
+      "category": "isometrics"
+    },
+    {
+      "id": "okiso",
+      "code": "OKiso",
+      "name": "Oberkörper Isometrics",
+      "fullName": "Upper Body Isometrics",
+      "defaultRPE": 4,
+      "defaultDuration": 10,
+      "color": "#607D8B",
+      "category": "isometrics"
+    },
+    {
+      "id": "bh1",
+      "code": "BH1",
+      "name": "Beweglichkeit/Haltung 1",
+      "fullName": "Mobility/Posture Session 1",
+      "defaultRPE": 3,
+      "defaultDuration": 10,
+      "color": "#8BC34A",
+      "category": "mobility"
+    },
+    {
+      "id": "bh2",
+      "code": "BH2",
+      "name": "Beweglichkeit/Haltung 2",
+      "fullName": "Mobility/Posture Session 2",
+      "defaultRPE": 3,
+      "defaultDuration": 10,
+      "color": "#CDDC39",
+      "category": "mobility"
+    },
+    {
+      "id": "kv1",
+      "code": "KV1",
+      "name": "Koordination/Prävention 1",
+      "fullName": "Coordination/Injury Prevention 1",
+      "defaultRPE": 1,
+      "defaultDuration": 10,
+      "color": "#FFC107",
+      "category": "coordination"
+    },
+    {
+      "id": "kv2",
+      "code": "KV2",
+      "name": "Koordination/Prävention 2",
+      "fullName": "Coordination/Injury Prevention 2",
+      "defaultRPE": 2,
+      "defaultDuration": 10,
+      "color": "#FF5722",
+      "category": "coordination"
+    },
+    {
+      "id": "praevention",
+      "code": "Prävention",
+      "name": "Prävention",
+      "fullName": "Prevention/Prehab",
+      "defaultRPE": 2,
+      "defaultDuration": 10,
+      "color": "#3F51B5",
+      "category": "prevention"
+    }
+  ],
+  "templates": [
+    {
+      "id": "tmpl-full-week-1-6",
+      "name": "Volle Trainingswoche",
+      "nameEN": "Full Training Week",
+      "description": "Full training week without competition",
+      "levelRange": "1-6",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": 1600,
+          "days": {
+            "samstag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "2-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukiso", "rpe": 4, "duration": 10 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "freitag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        },
+        {
+          "weekNumber": 2,
+          "totalRPE": 1100,
+          "days": {
+            "samstag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-full-week-v2-1-6",
+      "name": "Volle Trainingswoche Variante 2",
+      "nameEN": "Full Training Week Variant 2",
+      "description": "Full training week variant with match on Saturday",
+      "levelRange": "1-6",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 5, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 20 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "2-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "samstag2": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        },
+        {
+          "weekNumber": 2,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv2", "rpe": 2, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "bh1", "rpe": 3, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "kv2", "rpe": 2, "duration": 10 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "match", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-comp-sa-so-1-6",
+      "name": "Wettkampfwoche Sa-So",
+      "nameEN": "Competition Week Sat-Sun",
+      "description": "Competition week with matches on Saturday and Sunday",
+      "levelRange": "1-6",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "match", "blocks": [] },
+            "montag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "kv2", "rpe": 2, "duration": 10 },
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 5 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 20 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "2-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        },
+        {
+          "weekNumber": 2,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "ukp", "rpe": 4, "duration": 15 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": { "intensity": null, "type": "match", "blocks": [] },
+            "samstag2": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "match", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-comp-sa-1-6",
+      "name": "Wettkampfwoche Sa",
+      "nameEN": "Competition Week Sat",
+      "description": "Competition week with match on Saturday",
+      "levelRange": "1-6",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "match", "blocks": [] },
+            "montag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "kv2", "rpe": 2, "duration": 10 },
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 5 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 20 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 }
+              ]
+            },
+            "freitag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "match", "blocks": [] }
+          }
+        },
+        {
+          "weekNumber": 2,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "match", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "2-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "freitag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "samstag2": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "match", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-tournament-6d-1-6",
+      "name": "Turnierphase 6 Tage",
+      "nameEN": "Tournament Phase 6 Days",
+      "description": "Tournament phase with 6 days between matches",
+      "levelRange": "1-6",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukp", "rpe": 4, "duration": 15 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 20 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 15 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 }
+              ]
+            },
+            "freitag": { "intensity": null, "type": "match", "blocks": [] },
+            "samstag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-full-week-7-9",
+      "name": "Volle Trainingswoche",
+      "nameEN": "Full Training Week",
+      "description": "Full training week without competition",
+      "levelRange": "7-9",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": 2360,
+          "days": {
+            "samstag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "2-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukiso", "rpe": 4, "duration": 10 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "freitag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        },
+        {
+          "weekNumber": 2,
+          "totalRPE": 1370,
+          "days": {
+            "samstag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-full-week-v2-7-9",
+      "name": "Volle Trainingswoche Variante 2",
+      "nameEN": "Full Training Week Variant 2",
+      "description": "Full training week variant with match on Saturday",
+      "levelRange": "7-9",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 5, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 20 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "2-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "samstag2": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        },
+        {
+          "weekNumber": 2,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv2", "rpe": 2, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "bh1", "rpe": 3, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "kv2", "rpe": 2, "duration": 10 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "match", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-comp-sa-so-7-9",
+      "name": "Wettkampfwoche Sa-So",
+      "nameEN": "Competition Week Sat-Sun",
+      "description": "Competition week with matches on Saturday and Sunday",
+      "levelRange": "7-9",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": 1345,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "match", "blocks": [] },
+            "montag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "kv2", "rpe": 2, "duration": 10 },
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 5 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 20 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "2-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        },
+        {
+          "weekNumber": 2,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "ukp", "rpe": 4, "duration": 25 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "freitag": { "intensity": null, "type": "match", "blocks": [] },
+            "samstag2": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "match", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-comp-sa-7-9",
+      "name": "Wettkampfwoche Sa",
+      "nameEN": "Competition Week Sat",
+      "description": "Competition week with match on Saturday",
+      "levelRange": "7-9",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": 1385,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "match", "blocks": [] },
+            "montag": {
+              "intensity": "3-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "kv2", "rpe": 2, "duration": 10 },
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 5 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 20 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 }
+              ]
+            },
+            "freitag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "samstag2": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "match", "blocks": [] }
+          }
+        },
+        {
+          "weekNumber": 2,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "match", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "2-",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "4+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "freitag": { "intensity": null, "type": "spielen", "blocks": [] },
+            "samstag2": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag2": { "intensity": null, "type": "match", "blocks": [] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tmpl-tournament-6d-7-9",
+      "name": "Turnierphase 6 Tage",
+      "nameEN": "Tournament Phase 6 Days",
+      "description": "Tournament phase with 6 days between matches",
+      "levelRange": "7-9",
+      "weeks": [
+        {
+          "weekNumber": 1,
+          "totalRPE": null,
+          "days": {
+            "samstag": { "intensity": null, "type": "match", "blocks": [] },
+            "sonntag": { "intensity": null, "type": "frei", "blocks": [] },
+            "montag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "okex", "rpe": 4, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 },
+                { "blockId": "ukiso", "rpe": 5, "duration": 10 }
+              ]
+            },
+            "dienstag": {
+              "intensity": "3+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "kv1", "rpe": 1, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 },
+                { "blockId": "bh2", "rpe": 3, "duration": 10 },
+                { "blockId": "praevention", "rpe": 2, "duration": 10 },
+                { "blockId": "ukk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukp", "rpe": 4, "duration": 25 }
+              ]
+            },
+            "mittwoch": {
+              "intensity": "2+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "okk", "rpe": 6, "duration": 45 },
+                { "blockId": "ukex", "rpe": 4, "duration": 10 },
+                { "blockId": "okp", "rpe": 4, "duration": 25 },
+                { "blockId": "okiso", "rpe": 4, "duration": 10 }
+              ]
+            },
+            "donnerstag": {
+              "intensity": "1+",
+              "type": "training",
+              "blocks": [
+                { "blockId": "bh1", "rpe": 3, "duration": 10 },
+                { "blockId": "wu-spr", "rpe": 5, "duration": 30 }
+              ]
+            },
+            "freitag": { "intensity": null, "type": "match", "blocks": [] },
+            "samstag2": { "intensity": null, "type": "frei", "blocks": [] }
+          }
+        }
+      ]
+    }
+  ]
+}

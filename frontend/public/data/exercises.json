@@ -1,0 +1,732 @@
+{
+  "levels": {
+    "A": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-a-lb-e1", "order": 1, "name": "2-LEG ROPE SKIPPINGS", "tempo": "EXPL", "defaultSxR": "3x100", "defaultWeight": "BW" },
+          { "id": "ex-a-lb-e2", "order": 2, "name": "1/2-KN BASKETBALL SIDE TOSS AND CATCH - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-a-lb-e3", "order": 3, "name": "1/2-KN BASKETBALL SIDE TOSS AND CATCH - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" }
+        ],
+        "strengthA": [
+          { "id": "ex-a-lb-s1", "order": 1, "name": "PEZZIBALL SUPPORTED SQUAT - WALL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-a-lb-s2", "order": 2, "name": "SUPPORTED 1-LEG ISO HINGE", "defaultRPE": "8-9", "defaultSxR": "1x10/ea", "defaultWeight": "" },
+          { "id": "ex-a-lb-s3", "order": 3, "name": "DEAD BUG", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-a-lb-s4", "order": 4, "name": "HIP HINGE WITH STICK", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-a-lb-s5", "order": 5, "name": "BW SPLIT SQUAT TO TOUCH GROUND WITH STICK", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-a-lb-s6", "order": 6, "name": "KN SIDE PLANK", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-a-lb-s7", "order": 7, "name": "STEPDOWN SMALL STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-lb-s8", "order": 8, "name": "SPLIT STANCE", "defaultRPE": "8-9", "defaultSxR": "1x30s/ea", "defaultWeight": "" },
+          { "id": "ex-a-lb-s9", "order": 9, "name": "1/2-KN ANTIROTATION HOLD - BAND", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-a-lb-s10", "order": 10, "name": "SUPPORTED LATERAL SPLIT SQUAT WITH TRX", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-lb-s11", "order": 11, "name": "2-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-a-lb-s12", "order": 12, "name": "LYING MINIBAND HIP EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": []
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-a-ub-e1", "order": 1, "name": "SQUAT JUMP", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-a-ub-e2", "order": 2, "name": "1/2-KN MB OVERHEAD THROW WITH PARTNER", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" },
+          { "id": "ex-a-ub-e3", "order": 3, "name": "1/2-KN MB 2-ARM CHEST PASS WITH PARTNER", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" }
+        ],
+        "strengthA": [
+          { "id": "ex-a-ub-s1", "order": 1, "name": "1/2-KN 1-ARM CABLE/BAND PRESS", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s2", "order": 2, "name": "1/2-KN 1-ARM BAND PULLDOWN", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s3", "order": 3, "name": "DEAD BUG", "defaultRPE": "8-9", "defaultSxR": "1x10/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s4", "order": 4, "name": "SEATED 1-ARM BAND ROW", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s5", "order": 5, "name": "SEATED 1-ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s6", "order": 6, "name": "KN SIDE PLANK", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s7", "order": 7, "name": "STANDING BAND PULL APART", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-a-ub-s8", "order": 8, "name": "STANDING BAND/CABLE BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s9", "order": 9, "name": "STANDING BAND/CABLE TRICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s10", "order": 10, "name": "FOOT HAND CRAWL", "defaultRPE": "8-9", "defaultSxR": "1x10m", "defaultWeight": "" },
+          { "id": "ex-a-ub-s11", "order": 11, "name": "UNDERARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-a-ub-s12", "order": 12, "name": "TENNISBALL SQUEEZE ORANGE", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-a-ub-i1", "order": 13, "name": "ISO HOLD PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x30s", "defaultWeight": "" },
+          { "id": "ex-a-ub-i2", "order": 14, "name": "ISO HOLD PULL UP PASSIV LOW", "defaultRPE": "8-9", "defaultSxR": "1x30s", "defaultWeight": "" },
+          { "id": "ex-a-ub-i3", "order": 15, "name": "ISO HOLD PRONE BENCH \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x30s", "defaultWeight": "" },
+          { "id": "ex-a-ub-i4", "order": 16, "name": "ISO HOLD 1/2 KN 1-ARM LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x30s/ea", "defaultWeight": "" }
+        ]
+      }
+    },
+    "B": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-b-lb-e1", "order": 1, "name": "1-LEG ROPE SKIPPING", "tempo": "EXPL", "defaultSxR": "3x25/ea", "defaultWeight": "BW" },
+          { "id": "ex-b-lb-e2", "order": 2, "name": "1/2-KN BASKETBALL SIDE TOSS AND CATCH - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-b-lb-e3", "order": 3, "name": "1/2-KN BASKETBALL SIDE TOSS AND CATCH - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" }
+        ],
+        "strengthA": [
+          { "id": "ex-b-lb-s1", "order": 1, "name": "BW SQUAT TO TOUCH BOX", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-lb-s2", "order": 2, "name": "SUPPORTED 1-LEG ISO HINGE WITH HIP ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x10/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s3", "order": 3, "name": "PLANK", "defaultRPE": "8-9", "defaultSxR": "3x10s", "defaultWeight": "" },
+          { "id": "ex-b-lb-s4", "order": 4, "name": "HINGE TO KB TOUCH (KB SUMO DEADLIFT)", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-lb-s5", "order": 5, "name": "BW STEP BACK SPLIT SQUAT TO GROUND-STICK", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s6", "order": 6, "name": "SIDE PLANK", "defaultRPE": "8-9", "defaultSxR": "3x10s", "defaultWeight": "" },
+          { "id": "ex-b-lb-s7", "order": 7, "name": "STEPDOWN MEDIUM STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s8", "order": 8, "name": "SPLIT STANCE CLOSED EYES", "defaultRPE": "8-9", "defaultSxR": "1x30s/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s9", "order": 9, "name": "1/2-KN ANTI-ROTATION PRESS", "defaultRPE": "8-9", "defaultSxR": "3x10/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s10", "order": 10, "name": "HEARBEAT LATERAL SPLIT SQUAT WITH PEZZIBALL", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s11", "order": 11, "name": "2-LEG MARCHING GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-lb-s12", "order": 12, "name": "SIDELYING MINIBAND HIP EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s13", "order": 13, "name": "STANDING LEG HIP ABDUKTION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s14", "order": 14, "name": "STANDING SIDELYING LEG HIP ADDUKTION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s15", "order": 15, "name": "SEATED TIBIA BAND RAISE", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-s16", "order": 16, "name": "1-LEG CALF RAISES", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-b-lb-i1", "order": 17, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "1x45s/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-i2", "order": 18, "name": "ISO HOLD 1-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x45s/ea", "defaultWeight": "" },
+          { "id": "ex-b-lb-i3", "order": 19, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x45s/ea", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-b-ub-e1", "order": 1, "name": "CM JUMP", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-b-ub-e2", "order": 2, "name": "1/2-KN MB OVERHEAD THROW INTO WALL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" },
+          { "id": "ex-b-ub-e3", "order": 3, "name": "1/2-KN MB 2-ARM CHEST PASS INTO WALL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" }
+        ],
+        "strengthA": [
+          { "id": "ex-b-ub-s1", "order": 1, "name": "ARMS ELEVATED PUSH UP HIGH", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-ub-s2", "order": 2, "name": "1/2-KN 1-ARM BAND PULLDOWN", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-ub-s3", "order": 3, "name": "PLANK", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-b-ub-s4", "order": 4, "name": "1/2 KN 1-ARM BAND ROW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-ub-s5", "order": 5, "name": "SEATED 2-ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-ub-s6", "order": 6, "name": "SIDE PLANK", "defaultRPE": "8-9", "defaultSxR": "3x10s", "defaultWeight": "" },
+          { "id": "ex-b-ub-s7", "order": 7, "name": "STANDING CABLE \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-ub-s8", "order": 8, "name": "STANDING DB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-ub-s9", "order": 9, "name": "STANDING BAND/CABLE TRICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-ub-s10", "order": 10, "name": "BKWD CRAWL", "defaultRPE": "8-9", "defaultSxR": "1x10m", "defaultWeight": "" },
+          { "id": "ex-b-ub-s11", "order": 11, "name": "RACKET SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-b-ub-s12", "order": 12, "name": "TENNISBALL SQUEZZE GREEN", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-b-ub-i1", "order": 13, "name": "ISO HOLD PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" },
+          { "id": "ex-b-ub-i2", "order": 14, "name": "ISO HOLD PULL UP PASSIV LOW", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" },
+          { "id": "ex-b-ub-i3", "order": 15, "name": "ISO HOLD PRONE BENCH \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" },
+          { "id": "ex-b-ub-i4", "order": 16, "name": "ISO HOLD 1/2 KN 1-ARM LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x45ea", "defaultWeight": "" }
+        ]
+      }
+    },
+    "C": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-c-lb-e1", "order": 1, "name": "2-LEG ROPE SKIPPINGS - 3 CONTACTS", "tempo": "EXPL", "defaultSxR": "3x100", "defaultWeight": "BW" },
+          { "id": "ex-c-lb-e2", "order": 2, "name": "SPLIT STANCE BASKETBALL SIDE TOSS AND CATCH - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-c-lb-e3", "order": 3, "name": "SPLIT STANCE BASKETBALL SIDE TOSS AND CATCH - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" }
+        ],
+        "strengthA": [
+          { "id": "ex-c-lb-s1", "order": 1, "name": "HEARTBEAT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-c-lb-s2", "order": 2, "name": "1-ARM SUPPORTED 1-LEG ISO HINGE", "defaultRPE": "8-9", "defaultSxR": "1x10/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s3", "order": 3, "name": "PUSH UP - SHOULDER TAP", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s4", "order": 4, "name": "HINGE TO CRUSH HANDLE (KB SUMO DEADLIFT)", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-c-lb-s5", "order": 5, "name": "BW STEP FORWARD SPLIT SQUAT TO GROUND WITH STICK", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s6", "order": 6, "name": "SIDE PLANK ROTATIONS", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s7", "order": 7, "name": "STEP UP MEDIUM STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s8", "order": 8, "name": "1-LEG STANCE", "defaultRPE": "8-9", "defaultSxR": "1x30s/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s9", "order": 9, "name": "1/2-KN ANTI-ROTATION PRESS TO OVERHEAD", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s10", "order": 10, "name": "HEARBEAT LATERAL SPLIT SQUAT TO BOX", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s11", "order": 11, "name": "1-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s12", "order": 12, "name": "STANDING MINIBAND HIP EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s13", "order": 13, "name": "SIDE MARCH WITH MINIBAND OVER KNEE", "defaultRPE": "8-9", "defaultSxR": "1x15m/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s14", "order": 14, "name": "KN COPENHAGEN PLANK BENCH", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s15", "order": 15, "name": "SEATED TIBIA BAND RAISE", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-s16", "order": 16, "name": "LOADED 2-LEG CALF RAISES", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-c-lb-i1", "order": 17, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "1x60s/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-i2", "order": 18, "name": "ISO HOLD 1-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x60s/ea", "defaultWeight": "" },
+          { "id": "ex-c-lb-i3", "order": 19, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x60s/ea", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-c-ub-e1", "order": 1, "name": "SQUAT JUMP - TO BOX", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-c-ub-e2", "order": 2, "name": "SPLIT STANCE BASKETBALL OH THROWS WITH PARTNER", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" },
+          { "id": "ex-c-ub-e3", "order": 3, "name": "SPLIT STANCE BASKETBALL 2-ARM CHEST PASSES WITH PARTNER", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" }
+        ],
+        "strengthA": [
+          { "id": "ex-c-ub-s1", "order": 1, "name": "ARMS ELEVATED PUSH UP LOW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-c-ub-s2", "order": 2, "name": "PULL UP HANG PASSIVE LOW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-c-ub-s3", "order": 3, "name": "PUSH UP - SHOULDER TAP", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-c-ub-s4", "order": 4, "name": "SITTING ON THE FLOOR 2-ARM BAND ROW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-c-ub-s5", "order": 5, "name": "SITTING ON THE FLOOR 1 ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-c-ub-s6", "order": 6, "name": "SIDE PLANK ROTATIONS", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-c-ub-s7", "order": 7, "name": "STANDIG CABLE FACE PULL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-c-ub-s8", "order": 8, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-c-ub-s9", "order": 9, "name": "STANDING BAND/CABLE 2-ARM TRICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-c-ub-s10", "order": 10, "name": "SIDE CRAWL", "defaultRPE": "8-9", "defaultSxR": "1x10m", "defaultWeight": "" },
+          { "id": "ex-c-ub-s11", "order": 11, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-c-ub-s12", "order": 12, "name": "FLEXBAR WRING VERTICAL", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-c-ub-i1", "order": 13, "name": "ISO HOLD PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-c-ub-i2", "order": 14, "name": "ISO HOLD PULL UP PASSIV LOW", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-c-ub-i3", "order": 15, "name": "ISO HOLD PRONE BENCH \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-c-ub-i4", "order": 16, "name": "ISO HOLD 1/2 KN 1-ARM LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x60s/ea", "defaultWeight": "" }
+        ]
+      }
+    },
+    "D": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-d-lb-e1", "order": 1, "name": "DOUBLE JUMP 2-LEG ROPE SKIPPING", "tempo": "EXPL", "defaultSxR": "3x3x10", "defaultWeight": "BW" },
+          { "id": "ex-d-lb-e2", "order": 2, "name": "SPLIT STANCE BASKETBALL SIDE TOSS - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-d-lb-e3", "order": 3, "name": "SPLIT STANCE BASKETBALL SIDE TOSS - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" }
+        ],
+        "strengthA": [
+          { "id": "ex-d-lb-s1", "order": 1, "name": "KB GOBLET SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-lb-s2", "order": 2, "name": "STICK SUPPOERTED 1-LEG HINGE", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s3", "order": 3, "name": "PLANK - SWITCH IN FRONT", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s4", "order": 4, "name": "HINGE TO SNIFF AIR (KB SUMO DEADLIFT)", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-lb-s5", "order": 5, "name": "BW BOTTON-UP SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s6", "order": 6, "name": "FT ELEVATED SIDE PLANK", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s7", "order": 7, "name": "STEP UP HIGH STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s8", "order": 8, "name": "1-LEG STANCE CLOSED EYES", "defaultRPE": "8-9", "defaultSxR": "1x30s/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s9", "order": 9, "name": "TK ANTI-ROTATION HOLD", "defaultRPE": "8-9", "defaultSxR": "2x12/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s10", "order": 10, "name": "HEARBEAT LATERAL SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x15/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s11", "order": 11, "name": "2-LEG MARCHING FORWARD GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-lb-s12", "order": 12, "name": "STANDING PEZZIBALL EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s13", "order": 13, "name": "SIDE MARCH WITH MINIBAND OVER ANKLES", "defaultRPE": "8-9", "defaultSxR": "1x15m/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s14", "order": 14, "name": "FOOT COPENHAGENPLANK BENCH", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s15", "order": 15, "name": "SEATED TIBIA BAND RAISE", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-s16", "order": 16, "name": "LOADED 2-LEG CALF RAISES", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-d-lb-i1", "order": 17, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "1x60s/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-i2", "order": 18, "name": "ISO HOLD 1-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x60s/ea", "defaultWeight": "" },
+          { "id": "ex-d-lb-i3", "order": 19, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x60s/ea", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-d-ub-e1", "order": 1, "name": "CM JUMP - TO BOX", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-d-ub-e2", "order": 2, "name": "SPLIT STANCE MB OH THROWS INTO WALL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" },
+          { "id": "ex-d-ub-e3", "order": 3, "name": "SPLIT STANCE BASKETBALL 2-ARM CHEST PASSES INTO WALL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" }
+        ],
+        "strengthA": [
+          { "id": "ex-d-ub-s1", "order": 1, "name": "PUSH UP ON KNEE", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-ub-s2", "order": 2, "name": "PULL UP HANG AKTIVE LOW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-ub-s3", "order": 3, "name": "PLANK - SWITCH IN FRONT", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-d-ub-s4", "order": 4, "name": "STANDING 2-ARM BAND ROW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-ub-s5", "order": 5, "name": "SITTING ON THE FLOOR 2 ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-d-ub-s6", "order": 6, "name": "FT ELEVATED SIDE PLANK", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-d-ub-s7", "order": 7, "name": "PRONE BENCH ROW TO \"W\"", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-ub-s8", "order": 8, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-ub-s9", "order": 9, "name": "SUPPORTED DIPS", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-d-ub-s10", "order": 10, "name": "FOOT ELBOW CRAWL", "defaultRPE": "8-9", "defaultSxR": "1x10m", "defaultWeight": "" },
+          { "id": "ex-d-ub-s11", "order": 11, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-d-ub-s12", "order": 12, "name": "FLEXBAR WRING HORIZONAL", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-d-ub-i1", "order": 13, "name": "ISO HOLD FT ELEVATED PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x30s", "defaultWeight": "" },
+          { "id": "ex-d-ub-i2", "order": 14, "name": "ISO HOLD PULL UP ACTIVE LOW", "defaultRPE": "8-9", "defaultSxR": "1x30s", "defaultWeight": "" },
+          { "id": "ex-d-ub-i3", "order": 15, "name": "ISO HOLD PRONE BENCH \"V\"", "defaultRPE": "8-9", "defaultSxR": "1x30s", "defaultWeight": "" },
+          { "id": "ex-d-ub-i4", "order": 16, "name": "ISO HOLD 1/2 KN 1-ARM LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x30s/ea", "defaultWeight": "" }
+        ]
+      }
+    },
+    "E": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-e-lb-e1", "order": 1, "name": "ANKLE JUMPS - DOUBLE CONTACT", "tempo": "EXPL", "defaultSxR": "3x3x10", "defaultWeight": "BW" },
+          { "id": "ex-e-lb-e2", "order": 2, "name": "1-LEG BASKETBALL SIDE TOSS AND CATCH - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-e-lb-e3", "order": 3, "name": "1-LEG BASKETBALL SIDE TOSS AND CATCH - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" }
+        ],
+        "strengthA": [
+          { "id": "ex-e-lb-s1", "order": 1, "name": "BW RACK SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-e-lb-s2", "order": 2, "name": "1-LEG HINGE WITH ARMS STRETCHED", "defaultRPE": "8-9", "defaultSxR": "1x10/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s3", "order": 3, "name": "PUSH UP PLANK TENNISBALL CATCH", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s4", "order": 4, "name": "STICK DEADLIFT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-e-lb-s5", "order": 5, "name": "KB GOBLET SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s6", "order": 6, "name": "SIDE PLANK WITH LEG ABDUCTION", "defaultRPE": "8-9", "defaultSxR": "3x10s", "defaultWeight": "" },
+          { "id": "ex-e-lb-s7", "order": 7, "name": "CROSS STEP UP MEDIUM STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s8", "order": 8, "name": "1-LEG STANCE HEAD ROTATION - EYES FOCUS", "defaultRPE": "8-9", "defaultSxR": "1x30s/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s9", "order": 9, "name": "TK ANTI-ROTATION PRESS", "defaultRPE": "8-9", "defaultSxR": "2x12/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s10", "order": 10, "name": "GOBLET LATERAL SPLIT SQUAT TO BOX", "defaultRPE": "8-9", "defaultSxR": "1x12/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s11", "order": 11, "name": "2-LEG MARCHING FORWARD GLUTE BRIDGE WITH BLACKROLL", "defaultRPE": "8-9", "defaultSxR": "1x12", "defaultWeight": "" },
+          { "id": "ex-e-lb-s12", "order": 12, "name": "1-LEG STANDING MINIBAND HIP EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s13", "order": 13, "name": "SIDE MARCH WITH MINIBAND OVER FOOT", "defaultRPE": "8-9", "defaultSxR": "1x15m/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s14", "order": 14, "name": "FOOT COPENHAGEN PLANK BLACKROLL", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s15", "order": 15, "name": "SEATED TIBIA BAND RAISE", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-s16", "order": 16, "name": "LOADED 1-LEG CALF RAISES", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-e-lb-i1", "order": 17, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "1x75s/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-i2", "order": 18, "name": "ISO HOLD 1-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x75s/ea", "defaultWeight": "" },
+          { "id": "ex-e-lb-i3", "order": 19, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x75s/ea", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-e-ub-e1", "order": 1, "name": "REACTIVE SQUAT JUMP", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-e-ub-e2", "order": 2, "name": "1-LEG BASKETBALL OH THROW WITH PARTNER", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" },
+          { "id": "ex-e-ub-e3", "order": 3, "name": "1-LEG BASKETBALL CHEST PASS WITH PARTNER", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" }
+        ],
+        "strengthA": [
+          { "id": "ex-e-ub-s1", "order": 1, "name": "ECC PUSH UP ON KNEE UP", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-e-ub-s2", "order": 2, "name": "PULL UP ECC", "defaultRPE": "8-9", "defaultSxR": "1x8", "defaultWeight": "" },
+          { "id": "ex-e-ub-s3", "order": 3, "name": "STRAIGHT LEG GET UP", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-e-ub-s4", "order": 4, "name": "STANDING 1-ARM BAND ROW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-e-ub-s5", "order": 5, "name": "1/2 KN 1-ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-e-ub-s6", "order": 6, "name": "SIDE PLANK WITH LEG ABDUCTION", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-e-ub-s7", "order": 7, "name": "PRONE BENCH DB \"V\" RAISE", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-e-ub-s8", "order": 8, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-e-ub-s9", "order": 9, "name": "SUPPORTED DIPS", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-e-ub-s10", "order": 10, "name": "PUSH UP CRAWL", "defaultRPE": "8-9", "defaultSxR": "1x10m", "defaultWeight": "" },
+          { "id": "ex-e-ub-s11", "order": 11, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-e-ub-s12", "order": 12, "name": "FLEXBAR BREAKING DOWN", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-e-ub-i1", "order": 13, "name": "ISO HOLD FT ELEVATED PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" },
+          { "id": "ex-e-ub-i2", "order": 14, "name": "ISO HOLD PULL UP ACTIVE LOW", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" },
+          { "id": "ex-e-ub-i3", "order": 15, "name": "ISO HOLD PRONE BENCH \"V\"", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" },
+          { "id": "ex-e-ub-i4", "order": 16, "name": "ISO HOLD 1/2 KN 1-ARM LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x45s/ea", "defaultWeight": "" }
+        ]
+      }
+    },
+    "F": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-f-lb-e1", "order": 1, "name": "ANKLE JUMPS", "tempo": "EXPL", "defaultSxR": "3x3x10", "defaultWeight": "BW" },
+          { "id": "ex-f-lb-e2", "order": 2, "name": "1-LEG BASKETBALL SIDE TOSS - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-f-lb-e3", "order": 3, "name": "1-LEG BASKETBALL SIDE TOSS - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "" }
+        ],
+        "strengthA": [
+          { "id": "ex-f-lb-s1", "order": 1, "name": "BW 1-ARM OVERHEAD SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x10/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s2", "order": 2, "name": "1-LEG HINGE WITH MED/PEZZIBALL", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s3", "order": 3, "name": "PLANK - SWITCH ON BACK", "defaultRPE": "8-9", "defaultSxR": "1x10/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s4", "order": 4, "name": "1 KB DEADLIFT", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s5", "order": 5, "name": "BW BULGARIAN SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s6", "order": 6, "name": "FT ELEVATED SIDE PLANK - BLACKROLL", "defaultRPE": "8-9", "defaultSxR": "3x10s", "defaultWeight": "" },
+          { "id": "ex-f-lb-s7", "order": 7, "name": "CROSS STEP UP HIGH STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s8", "order": 8, "name": "1-LEG STANCE HEAD UP AND DOWN - EYES FOCUS", "defaultRPE": "8-9", "defaultSxR": "1x30s/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s9", "order": 9, "name": "TK ANTI-ROTATION PRESS TO OVERHEAD", "defaultRPE": "8-9", "defaultSxR": "2x12/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s10", "order": 10, "name": "GOBLET LATERAL SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x10/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s11", "order": 11, "name": "2-LEG CURL WITH PEZZIBALL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-f-lb-s12", "order": 12, "name": "1-LEG STANDING MINIBAND HIP EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s13", "order": 13, "name": "SIDE MARCH WITH MINIBAND OVER KNEE HEAVY BAND", "defaultRPE": "8-9", "defaultSxR": "1x15m/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s14", "order": 14, "name": "FOOT COPENHAGEN PLANK TRX", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s15", "order": 15, "name": "SEATED TIBIA BAND RAISE", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-s16", "order": 16, "name": "LOADED 1-LEG CALF RAISES", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-f-lb-i1", "order": 17, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "1x90s/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-i2", "order": 18, "name": "ISO HOLD 1-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x90s/ea", "defaultWeight": "" },
+          { "id": "ex-f-lb-i3", "order": 19, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x90s/ea", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-f-ub-e1", "order": 1, "name": "REACTIVE CMJ", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-f-ub-e2", "order": 2, "name": "1-LEG BASKETBALL OH THROW INTO WALL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" },
+          { "id": "ex-f-ub-e3", "order": 3, "name": "1-LEG BASKETBALL CHEST PASSES INTO WALL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BB" }
+        ],
+        "strengthA": [
+          { "id": "ex-f-ub-s1", "order": 1, "name": "PUSH UP", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-f-ub-s2", "order": 2, "name": "BAND SUPPORTED PULL UP", "defaultRPE": "8-9", "defaultSxR": "1x8", "defaultWeight": "" },
+          { "id": "ex-f-ub-s3", "order": 3, "name": "PUSH UP PLANK TENNISBALL CATCH", "defaultRPE": "8-9", "defaultSxR": "1x10ea", "defaultWeight": "" },
+          { "id": "ex-f-ub-s4", "order": 4, "name": "3-POINT HINGE ROW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-f-ub-s5", "order": 5, "name": "STANDING 1-ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-f-ub-s6", "order": 6, "name": "FT ELEVATED SIDE PLANK - BLACKROLL", "defaultRPE": "8-9", "defaultSxR": "3x10s/ea", "defaultWeight": "" },
+          { "id": "ex-f-ub-s7", "order": 7, "name": "PRONE \"T\", \"V\" RAISE", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-f-ub-s8", "order": 8, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-f-ub-s9", "order": 9, "name": "SUPPORTED DIPS", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-f-ub-s10", "order": 10, "name": "LATERAL PUSH UP CRAWL", "defaultRPE": "8-9", "defaultSxR": "1x10m", "defaultWeight": "" },
+          { "id": "ex-f-ub-s11", "order": 11, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" },
+          { "id": "ex-f-ub-s12", "order": 12, "name": "FLEXBAR BREAKING UP", "defaultRPE": "8-9", "defaultSxR": "1x20/ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": [
+          { "id": "ex-f-ub-i1", "order": 13, "name": "ISO HOLD FT ELEVATED PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-f-ub-i2", "order": 14, "name": "ISO HOLD PULL UP ACTIVE LOW", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-f-ub-i3", "order": 15, "name": "ISO HOLD PRONE BENCH \"V\"", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-f-ub-i4", "order": 16, "name": "ISO HOLD 1/2 KN 1-ARM LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x60s/ea", "defaultWeight": "" }
+        ]
+      }
+    },
+    "1": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-1-lb-e1", "order": 1, "name": "RESISTED ANKLE JUMPS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-1-lb-e2", "order": 2, "name": "1-LEG MEDBALL SIDE TOSS - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" },
+          { "id": "ex-1-lb-e3", "order": 3, "name": "1-LEG MEDBALL SIDE TOSS - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-1-lb-sa1", "order": 1, "name": "KB GOBLET SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-1-lb-sa2", "order": 2, "name": "LOADED 2-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-1-lb-sa3", "order": 3, "name": "PLANK - SANDBAG PULL THROUGH", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-1-lb-sa4", "order": 4, "name": "1-ARM 1KB SUMO DL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-1-lb-sa5", "order": 5, "name": "KB GOBLET SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-1-lb-sa6", "order": 6, "name": "FT ELEVATED SIDE PLANK - BLACKROLL", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-1-lb-sb1", "order": 7, "name": "STEPDOWN HIGH STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-1-lb-sb2", "order": 8, "name": "1/2-KN ANTI-ROTATION PRESS", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" },
+          { "id": "ex-1-lb-sb3", "order": 9, "name": "1-LEG MINIBAND PEZZIBALL EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-1-lb-sb4", "order": 10, "name": "SIDE MARCH WITH MINIBAND OVER FOOT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-1-lb-sb5", "order": 11, "name": "FOOT COPENHAGENPLANK PEZZIBALL", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-1-lb-sb6", "order": 12, "name": "TIBIALIS RAISES TOUCHING WALL WITH TOES", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" }
+        ],
+        "isometrics": []
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-1-ub-e1", "order": 1, "name": "REACTIVE BOX SQUAT JUMP", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-1-ub-e2", "order": 2, "name": "1/2-KN MB OH THROW & CATCH", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "1kg" },
+          { "id": "ex-1-ub-e3", "order": 3, "name": "1/2-KN MB CHEST PASS & CATCH", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "1kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-1-ub-sa1", "order": 1, "name": "1/2-KN 1-ARM CABLE/BAND PRESS", "defaultRPE": "8-9", "defaultSxR": "2x12", "defaultWeight": "" },
+          { "id": "ex-1-ub-sa2", "order": 2, "name": "1/2-KN 1-ARM BAND PULLDOWN", "defaultRPE": "8-9", "defaultSxR": "2x12", "defaultWeight": "" },
+          { "id": "ex-1-ub-sa3", "order": 3, "name": "LOADED FOOT HAND CRAWL", "defaultRPE": "8-9", "defaultSxR": "2x15m", "defaultWeight": "" },
+          { "id": "ex-1-ub-sa4", "order": 4, "name": "STANDING 1-ARM BAND/CABLE ROW", "defaultRPE": "8-9", "defaultSxR": "2x12", "defaultWeight": "" },
+          { "id": "ex-1-ub-sa5", "order": 5, "name": "1/2 KN 1-ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "2x12", "defaultWeight": "" },
+          { "id": "ex-1-ub-sa6", "order": 6, "name": "PLANK - SWITCH ON BACK", "defaultRPE": "8-9", "defaultSxR": "2x12", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": []
+      }
+    },
+    "2": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-2-lb-e1", "order": 1, "name": "ASSISTED ANKLE JUMPS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-2-lb-e2", "order": 2, "name": "SPLIT SQUAT MEDBALL SIDE TOSS AND CATCH - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" },
+          { "id": "ex-2-lb-e3", "order": 3, "name": "SPLIT SQUAT MEDBALL SIDE TOSS AND CATCH - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-2-lb-sa1", "order": 1, "name": "BW RACK SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-lb-sa2", "order": 2, "name": "LOADED 1-LEG GLUTE BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-lb-sa3", "order": 3, "name": "PUSH UP PLANK SHOULDER TAP AND TENNISBALL CATCH", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-lb-sa4", "order": 4, "name": "1 KB DEADLIFT", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-lb-sa5", "order": 5, "name": "2 KB SUITCASE SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-lb-sa6", "order": 6, "name": "BENCH OBLIQUE ISO HOLD - CHEST", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" }
+        ],
+        "strengthB": [],
+        "isometrics": []
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-2-ub-e1", "order": 1, "name": "REACTIVE BOX SQUAT JUMP - TO BOX", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-2-ub-e2", "order": 2, "name": "1/2-KN MB OH THROW", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" },
+          { "id": "ex-2-ub-e3", "order": 3, "name": "1/2-KN MB CHEST PASS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-2-ub-sa1", "order": 1, "name": "ARMS ELEVATED PUSH UP HIGH", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-ub-sa2", "order": 2, "name": "1/2-KN 1-ARM BAND PULLDOWN", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-ub-sa3", "order": 3, "name": "LOADED BKWD CRAWL", "defaultRPE": "8-9", "defaultSxR": "2x15m", "defaultWeight": "" },
+          { "id": "ex-2-ub-sa4", "order": 4, "name": "STANDING 1-ARM BAND/CABLE ROW", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-ub-sa5", "order": 5, "name": "1/2 KN 1-ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-ub-sa6", "order": 6, "name": "PLANK - SANDBAG PULL THROUGH", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-2-ub-sb1", "order": 7, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-ub-sb2", "order": 8, "name": "STANDING BAND/CABLE TRICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-ub-sb3", "order": 9, "name": "SIDE PLANK WITH LEG ABDUCTION", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" },
+          { "id": "ex-2-ub-sb4", "order": 10, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-ub-sb5", "order": 11, "name": "FLEXBAR WRING HORIZONAL", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-2-ub-sb6", "order": 12, "name": "STANDING CABLE \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-2-ub-i1", "order": 13, "name": "PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" },
+          { "id": "ex-2-ub-i2", "order": 14, "name": "ISO HOLD PRONE BENCH \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" },
+          { "id": "ex-2-ub-i3", "order": 15, "name": "1/2-KN LANDMINE PRESS-ISO HOLD", "defaultRPE": "8-9", "defaultSxR": "1x45s", "defaultWeight": "" }
+        ]
+      }
+    },
+    "3": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-3-lb-e1", "order": 1, "name": "ASSISTED ANKLE JUMPS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-3-lb-e2", "order": 2, "name": "SPLIT SQUAT MEDBALL SIDE TOSS - PARALLEL", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" },
+          { "id": "ex-3-lb-e3", "order": 3, "name": "SPLIT SQUAT MEDBALL SIDE TOSS - 90\u00b0", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-3-lb-sa1", "order": 1, "name": "BW 1-ARM OVERHEAD SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-lb-sa2", "order": 2, "name": "2-LEG HIP THRUST", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-lb-sa3", "order": 3, "name": "PUSH UP PLANK MEDBALL BALL CATCH", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-lb-sa4", "order": 4, "name": "2KB SUITCASE DL", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-lb-sa5", "order": 5, "name": "1 KB SUITBASE SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-lb-sa6", "order": 6, "name": "BENCH OBLIQUE ISO HOLD - HEAD", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-3-lb-sb1", "order": 7, "name": "STEPDOWN HIGH STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-lb-sb2", "order": 8, "name": "1/2-KN ANTI-ROTATION PRESS TO OVERHEAD", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" },
+          { "id": "ex-3-lb-sb3", "order": 9, "name": "1-LEG MINIBAND PEZZIBALL EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-lb-sb4", "order": 10, "name": "SIDE MARCH WITH MINIBAND OVER FOOT", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-lb-sb5", "order": 11, "name": "FOOT COPENHAGENPLANK PEZZIBALL", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-3-lb-sb6", "order": 12, "name": "TIBIALIS RAISES TOUCHING WALL WITH TOES", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-3-lb-i1", "order": 13, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-3-lb-i2", "order": 14, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-3-lb-i3", "order": 15, "name": "1-LEG HAMSTRING BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-3-ub-e1", "order": 1, "name": "RESISTEND SQUAT JUMP", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-3-ub-e2", "order": 2, "name": "1-LEG MB OH THROW", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" },
+          { "id": "ex-3-ub-e3", "order": 3, "name": "1-LEG MB CHEST PASS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-3-ub-sa1", "order": 1, "name": "ARMS ELEVATED PUSH UP LOW", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-ub-sa2", "order": 2, "name": "PULL UP ECC", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-ub-sa3", "order": 3, "name": "LOADED SIDE CRAWL", "defaultRPE": "8-9", "defaultSxR": "2x15m", "defaultWeight": "" },
+          { "id": "ex-3-ub-sa4", "order": 4, "name": "STANDING 1-ARM BAND/CABLE ROW", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-ub-sa5", "order": 5, "name": "STANDING 1-ARM OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-ub-sa6", "order": 6, "name": "PUSH UP PLANK MEDBALL BALL CATCH", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-3-ub-sb1", "order": 7, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-ub-sb2", "order": 8, "name": "STANDING BAND/CABLE TRICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-ub-sb3", "order": 9, "name": "FT ELEVATED SIDE PLANK - BLACKROLL", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-3-ub-sb4", "order": 10, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-ub-sb5", "order": 11, "name": "FLEXBAR BREAKING DOWN", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-3-ub-sb6", "order": 12, "name": "STANDIG CABLE FACE PULL", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-3-ub-i1", "order": 13, "name": "PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-3-ub-i2", "order": 14, "name": "ISO HOLD PRONE BENCH \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" },
+          { "id": "ex-3-ub-i3", "order": 15, "name": "1/2-KN LANDMINE PRESS-ISO HOLD", "defaultRPE": "8-9", "defaultSxR": "1x60s", "defaultWeight": "" }
+        ]
+      }
+    },
+    "4": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-4-lb-e1", "order": 1, "name": "SPLIT ANKLE JUMPS - DC", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-4-lb-e2", "order": 2, "name": "OPEN STANCE MEDBALL SIDE TOSS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" },
+          { "id": "ex-4-lb-e3", "order": 3, "name": "CLOSED STANCE MEDBALL SIDE TOSS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-4-lb-sa1", "order": 1, "name": "1-ARM 1KB RACK SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-lb-sa2", "order": 2, "name": "1-LEG HIP THRUST", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-lb-sa3", "order": 3, "name": "PB STIR THE POT", "defaultRPE": "8-9", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-4-lb-sa4", "order": 4, "name": "TRAP BAR DL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-lb-sa5", "order": 5, "name": "PEZZIBALL SUPPORTED HEARBEAT LATERAL SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-lb-sa6", "order": 6, "name": "BENCH OBLIQUE ISO HOLD - OH", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-4-lb-sb1", "order": 7, "name": "STEP UP MEDIUM STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-lb-sb2", "order": 8, "name": "TK ANTI-ROTATION HOLD", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" },
+          { "id": "ex-4-lb-sb3", "order": 9, "name": "SIDE LYING LEG ABD W/MINIBAND HIP EXTERNAL ROT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-lb-sb4", "order": 10, "name": "SIDE MARCH WITH MINIBAND OVER FOOT", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-lb-sb5", "order": 11, "name": "LOADED FOOT COPENHAGEN PLANK BLACKROLL", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-4-lb-sb6", "order": 12, "name": "1-LEG TIBIALIS RAISES", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-4-lb-i1", "order": 13, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "1x75s", "defaultWeight": "" },
+          { "id": "ex-4-lb-i2", "order": 14, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x75s", "defaultWeight": "" },
+          { "id": "ex-4-lb-i3", "order": 15, "name": "1-LEG HAMSTRING BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x75s", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-4-ub-e1", "order": 1, "name": "RESISTEND CMJ", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-4-ub-e2", "order": 2, "name": "SPLIT MB OH THROW", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "1kg" },
+          { "id": "ex-4-ub-e3", "order": 3, "name": "SPLIT MB CHEST PASS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "1kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-4-ub-sa1", "order": 1, "name": "PUSH UP ON KNEE", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-ub-sa2", "order": 2, "name": "1/2-KN 1-ARM BAND PULLDOWN", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-ub-sa3", "order": 3, "name": "LOADED FOOT ELBOW CRAWL", "defaultRPE": "8-9", "defaultSxR": "2x15m", "defaultWeight": "" },
+          { "id": "ex-4-ub-sa4", "order": 4, "name": "2-ARM TRX ROW", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-ub-sa5", "order": 5, "name": "1/2 KN LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-ub-sa6", "order": 6, "name": "PB STIR THE POT", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-4-ub-sb1", "order": 7, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-ub-sb2", "order": 8, "name": "SUPPORTED DIPS", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-ub-sb3", "order": 9, "name": "TK PEZZIBALL BAND ROTATION", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-4-ub-sb4", "order": 10, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-ub-sb5", "order": 11, "name": "FLEXBAR BREAKING UP", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" },
+          { "id": "ex-4-ub-sb6", "order": 12, "name": "STANDING 1-ARM BAND \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x20", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-4-ub-i1", "order": 13, "name": "PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x75s", "defaultWeight": "" },
+          { "id": "ex-4-ub-i2", "order": 14, "name": "ISO HOLD PRONE BENCH \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x75s", "defaultWeight": "" },
+          { "id": "ex-4-ub-i3", "order": 15, "name": "1/2-KN LANDMINE PRESS-ISO HOLD", "defaultRPE": "8-9", "defaultSxR": "1x75s", "defaultWeight": "" }
+        ]
+      }
+    },
+    "5": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-5-lb-e1", "order": 1, "name": "LATERAL BOUND W/STICK", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-5-lb-e2", "order": 2, "name": "SPLIT STEP W OPEN STANCE MEDBALL SIDE TOSS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "1kg" },
+          { "id": "ex-5-lb-e3", "order": 3, "name": "SLIDE IN CLOSED STANCE MED BALL SIDE TOSS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "1kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-5-lb-sa1", "order": 1, "name": "2-ARM 2KB RACK SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-lb-sa2", "order": 2, "name": "LOADED 2-LEG HIP THRUST", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-lb-sa3", "order": 3, "name": "PLANK - SWITCH ON BACK AND PULL THROUGH", "defaultRPE": "8-9", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-5-lb-sa4", "order": 4, "name": "TRAP BAR DL", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-lb-sa5", "order": 5, "name": "HEARBEAT LATERAL SPLIT SQUAT TO BOX", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-lb-sa6", "order": 6, "name": "LOADED BENCH OBLIQUE ISO HOLD - CHEST", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-5-lb-sb1", "order": 7, "name": "STEP UP HIGH STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-lb-sb2", "order": 8, "name": "TK ANTI-ROTATION PRESS", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" },
+          { "id": "ex-5-lb-sb3", "order": 9, "name": "SEATED LEG ABD W/BAND + W/LEG EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-lb-sb4", "order": 10, "name": "SIDE MARCH WITH MINIBAND OVER KNEE HEAVY BAND", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-lb-sb5", "order": 11, "name": "LOADED FOOT COPENHAGEN PLANK BLACKROLL", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-5-lb-sb6", "order": 12, "name": "1-LEG TIBIALIS RAISES 45\u00b0", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-5-lb-i1", "order": 13, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "1x90s", "defaultWeight": "" },
+          { "id": "ex-5-lb-i2", "order": 14, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x90s", "defaultWeight": "" },
+          { "id": "ex-5-lb-i3", "order": 15, "name": "1-LEG HAMSTRING BRIDGE", "defaultRPE": "8-9", "defaultSxR": "1x90s", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-5-ub-e1", "order": 1, "name": "ASSISTEND SQUAT JUMP", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-5-ub-e2", "order": 2, "name": "STAGGERED MB OH THROW", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" },
+          { "id": "ex-5-ub-e3", "order": 3, "name": "STAGGERED MB CHEST PASS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-5-ub-sa1", "order": 1, "name": "PUSH UP VARIATION", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-ub-sa2", "order": 2, "name": "1/2-KN 1-ARM CABLE/BAND PULLDOWN", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-ub-sa3", "order": 3, "name": "LOADED PUSH UP CRAWL", "defaultRPE": "8-9", "defaultSxR": "2x15m", "defaultWeight": "" },
+          { "id": "ex-5-ub-sa4", "order": 4, "name": "1-KB 3 POINT HINGE ROW", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-ub-sa5", "order": 5, "name": "1/2 KN LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-ub-sa6", "order": 6, "name": "FEET ELEVATED PB STIR THE POT", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-5-ub-sb1", "order": 7, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-ub-sb2", "order": 8, "name": "STANDING BAND/CABLE 2-ARM TRICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-ub-sb3", "order": 9, "name": "PEZZIBALL BAND ROTATION CLOSED STANCE", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-5-ub-sb4", "order": 10, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-ub-sb5", "order": 11, "name": "TENNISBALL SQUEEZE", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" },
+          { "id": "ex-5-ub-sb6", "order": 12, "name": "1-ARM BAND SHOULDER EXTERNAL ROTATION", "defaultRPE": "8-9", "defaultSxR": "1x15", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-5-ub-i1", "order": 13, "name": "PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "1x90s", "defaultWeight": "" },
+          { "id": "ex-5-ub-i2", "order": 14, "name": "ISO HOLD PRONE BENCH \"T\"", "defaultRPE": "8-9", "defaultSxR": "1x90s", "defaultWeight": "" },
+          { "id": "ex-5-ub-i3", "order": 15, "name": "1/2-KN LANDMINE PRESS-ISO HOLD", "defaultRPE": "8-9", "defaultSxR": "1x90s", "defaultWeight": "" }
+        ]
+      }
+    },
+    "6": {
+      "lowerBody": {
+        "block": 1,
+        "label": "Unterkörper",
+        "explosiv": [
+          { "id": "ex-6-lb-e1", "order": 1, "name": "LATERAL BOUND 45\u00b0 W/STICK", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-6-lb-e2", "order": 2, "name": "SLIDE IN OPEN STANCE MED BALL SIDE TOSS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "1kg" },
+          { "id": "ex-6-lb-e3", "order": 3, "name": "SLIDE IN CLOSED STANCE MED BALL SIDE TOSS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "1kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-6-lb-sa1", "order": 1, "name": "BACK SQUAT WITH BARBEL", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-lb-sa2", "order": 2, "name": "LOADED 1-LEG HIP THRUST", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-lb-sa3", "order": 3, "name": "PB ROLL-OUT", "defaultRPE": "8-9", "defaultSxR": "3x5", "defaultWeight": "" },
+          { "id": "ex-6-lb-sa4", "order": 4, "name": "TRAP BAR DL", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-lb-sa5", "order": 5, "name": "HEARBEAT LATERAL SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-lb-sa6", "order": 6, "name": "BENCH OBLIQUE ISO HOLD - CHEST PRESS", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-6-lb-sb1", "order": 7, "name": "CROSS STEP UP MEDIUM STEPPER", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-lb-sb2", "order": 8, "name": "TK ANTI-ROTATION PRESS TO OVERHEAD", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" },
+          { "id": "ex-6-lb-sb3", "order": 9, "name": "SEATED LEG ABD W/BAND + W/ISO LEG EXTERNAL ROT W/ANKLE WIPERS", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-lb-sb4", "order": 10, "name": "SIDE MARCH WITH MINIBANDS", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-lb-sb5", "order": 11, "name": "LOADED FOOT COPENHAGEN PLANK TRX", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-6-lb-sb6", "order": 12, "name": "SEATED TIBIALIS RAISES", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-6-lb-i1", "order": 13, "name": "ISO HOLD 1-LEG CALF RAISE", "defaultRPE": "8-9", "defaultSxR": "2x90s", "defaultWeight": "" },
+          { "id": "ex-6-lb-i2", "order": 14, "name": "ISO HOLD SPLIT SQUAT", "defaultRPE": "8-9", "defaultSxR": "2x90s", "defaultWeight": "" },
+          { "id": "ex-6-lb-i3", "order": 15, "name": "1-LEG HAMSTRING BRIDGE", "defaultRPE": "8-9", "defaultSxR": "2x90s", "defaultWeight": "" }
+        ]
+      },
+      "upperBody": {
+        "block": 2,
+        "label": "Oberkörper",
+        "explosiv": [
+          { "id": "ex-6-ub-e1", "order": 1, "name": "ASSISTEND CMJ", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "BW" },
+          { "id": "ex-6-ub-e2", "order": 2, "name": "BASE MB OH THROW", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" },
+          { "id": "ex-6-ub-e3", "order": 3, "name": "BASE MB CHEST PASS", "tempo": "EXPL", "defaultSxR": "3x5", "defaultWeight": "2kg" }
+        ],
+        "strengthA": [
+          { "id": "ex-6-ub-sa1", "order": 1, "name": "LOADED PUSH UP", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-ub-sa2", "order": 2, "name": "BAND SUPPORTED PULL UP", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-ub-sa3", "order": 3, "name": "LOADED LATERAL PUSH UP CRAWL", "defaultRPE": "8-9", "defaultSxR": "2x15m", "defaultWeight": "" },
+          { "id": "ex-6-ub-sa4", "order": 4, "name": "1-KB 2 POINT 1-LEG HINGE ROW", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-ub-sa5", "order": 5, "name": "1/2 KN LANDMINE OVERHEAD PRESS", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-ub-sa6", "order": 6, "name": "PB ROLL-OUT", "defaultRPE": "8-9", "defaultSxR": "3x5 ea", "defaultWeight": "" }
+        ],
+        "strengthB": [
+          { "id": "ex-6-ub-sb1", "order": 7, "name": "STANDING BB BICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-ub-sb2", "order": 8, "name": "STANDING BAND/CABLE 2-ARM TRICEP CURL", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-ub-sb3", "order": 9, "name": "PEZZIBALL BAND ROTATION OPEN STANCE", "defaultRPE": "8-9", "defaultSxR": "3x10s ea", "defaultWeight": "" },
+          { "id": "ex-6-ub-sb4", "order": 10, "name": "LOADED ARM SUPINATION/PRONATION", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-ub-sb5", "order": 11, "name": "FLEXBAR WRING", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" },
+          { "id": "ex-6-ub-sb6", "order": 12, "name": "1-ARM BAND SHOULDER EXTERNAL ROTATION 90\u00b0", "defaultRPE": "8-9", "defaultSxR": "1x10", "defaultWeight": "" }
+        ],
+        "isometrics": [
+          { "id": "ex-6-ub-i1", "order": 13, "name": "PUSH UP PLANK", "defaultRPE": "8-9", "defaultSxR": "2x90s", "defaultWeight": "" },
+          { "id": "ex-6-ub-i2", "order": 14, "name": "ISO HOLD PRONE BENCH \"T\"", "defaultRPE": "8-9", "defaultSxR": "2x90s", "defaultWeight": "" },
+          { "id": "ex-6-ub-i3", "order": 15, "name": "1/2-KN LANDMINE PRESS-ISO HOLD", "defaultRPE": "8-9", "defaultSxR": "2x90s", "defaultWeight": "" }
+        ]
+      }
+    }
+  }
+}
