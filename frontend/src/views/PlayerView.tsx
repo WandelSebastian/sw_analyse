@@ -2,32 +2,26 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { api } from '../api/client'
 import { Modal } from '../components/Modal'
 import { ExerciseTimer } from '../components/ExerciseTimer'
-import type { Player, WeekPlan, Exercise, ExercisesData, ToastType } from '../types'
+import type { Player, WeekPlan, Exercise, LevelExercise, ToastType } from '../types'
 
 const DAYS = ['samstag','sonntag','montag','dienstag','mittwoch','donnerstag','freitag'] as const
 const DAY_FULL: Record<string, string> = {
-  samstag:'Samstag', sonntag:'Sonntag', montag:'Montag',
-  dienstag:'Dienstag', mittwoch:'Mittwoch', donnerstag:'Donnerstag', freitag:'Freitag'
+  samstag:'Saturday', sonntag:'Sunday', montag:'Monday',
+  dienstag:'Tuesday', mittwoch:'Wednesday', donnerstag:'Thursday', freitag:'Friday'
 }
 
 const BLOCK_COLORS: Record<string, string> = {
   'wu-spr':'#4CAF50','ukk':'#2196F3','okk':'#FF9800','ukex':'#E91E63','okex':'#9C27B0',
-  'ukp':'#00BCD4','okp':'#009688','ukiso':'#795548','okiso':'#607D8B','bh1':'#8BC34A',
-  'bh2':'#CDDC39','kv1':'#FFC107','kv2':'#FF5722','praevention':'#3F51B5',
+  'ukp':'#00BCD4','okp':'#009688','ukiso':'#795548','okiso':'#607D8B','ukbh':'#8BC34A',
+  'okbh':'#CDDC39','ukkv':'#FFC107','okkv':'#FF5722','praevention':'#3F51B5',
   'spielen':'#555','match':'#c0392b','frei':'#777'
 }
 
-const BLOCK_MAP: Record<string, { bodyPart: string; blocks: string[] } | null> = {
-  'ukk': {bodyPart:'lowerBody', blocks:['strengthA','strengthB']},
-  'okk': {bodyPart:'upperBody', blocks:['strengthA','strengthB']},
-  'ukex': {bodyPart:'lowerBody', blocks:['explosiv']},
-  'okex': {bodyPart:'upperBody', blocks:['explosiv']},
-  'ukiso': {bodyPart:'lowerBody', blocks:['isometrics']},
-  'okiso': {bodyPart:'upperBody', blocks:['isometrics']},
-  'ukp': {bodyPart:'lowerBody', blocks:['strengthB']},
-  'okp': {bodyPart:'upperBody', blocks:['strengthB']},
-  'wu-spr': null, 'bh1':null, 'bh2':null, 'kv1':null, 'kv2':null, 'praevention':null
-}
+// Block IDs now directly match LevelExercise.block values
+const EXERCISE_BLOCKS = new Set([
+  'ukk','okk','ukex','okex','ukp','okp','ukiso','okiso',
+  'ukbh','okbh','ukkv','okkv'
+])
 
 function getBlockColor(id: string) { return BLOCK_COLORS[id] || '#888' }
 
@@ -44,12 +38,13 @@ interface Props {
 export function PlayerView({ players, showToast }: Props) {
   const [playerId, setPlayerId] = useState('')
   const [plan, setPlan] = useState<WeekPlan | null>(null)
-  const [exercisesData, setExercisesData] = useState<ExercisesData | null>(null)
+  const [allExercises, setAllExercises] = useState<Exercise[]>([])
+  const [allLevelExercises, setAllLevelExercises] = useState<LevelExercise[]>([])
 
   // Block detail modal
   const [detailOpen, setDetailOpen] = useState(false)
   const [detailTitle, setDetailTitle] = useState('')
-  const [detailExercises, setDetailExercises] = useState<Exercise[]>([])
+  const [detailExercises, setDetailExercises] = useState<(LevelExercise & { exercise?: Exercise })[]>([])
   const [detailBlockId, setDetailBlockId] = useState('')
   const [detailLevel, setDetailLevel] = useState('')
   const [detailDuration, setDetailDuration] = useState(0)
@@ -64,9 +59,8 @@ export function PlayerView({ players, showToast }: Props) {
   const forceUpdate = () => setTick(t => t + 1)
 
   useEffect(() => {
-    fetch('/data/exercises.json')
-      .then(r => r.ok ? r.json() : null)
-      .then(setExercisesData)
+    Promise.all([api.getExercises(), api.getLevelExercises()])
+      .then(([exs, les]) => { setAllExercises(exs); setAllLevelExercises(les) })
       .catch(() => null)
   }, [])
 
@@ -87,23 +81,21 @@ export function PlayerView({ players, showToast }: Props) {
 
   const player = players.find(p => p.id === playerId)
 
-  const openBlockDetail = async (level: string, blockId: string, code: string, duration: number) => {
-    const mapping = BLOCK_MAP[blockId]
-    if (!mapping) { showToast(code + ': Kein Übungsdetail verfügbar', 'info'); return }
+  const exerciseMap = new Map(allExercises.map(e => [e.id, e]))
 
-    if (!exercisesData?.levels?.[level]) {
-      showToast('Keine Übungen für Level ' + level, 'info')
+  const openBlockDetail = async (level: string, blockId: string, code: string, duration: number) => {
+    if (!EXERCISE_BLOCKS.has(blockId)) { showToast(code + ': No exercise detail available', 'info'); return }
+
+    // Filter level exercises for this level and block
+    const matched = allLevelExercises
+      .filter(le => le.level === level && le.block === blockId)
+      .map(le => ({ ...le, exercise: exerciseMap.get(le.exerciseId) }))
+      .sort((a, b) => a.order - b.order)
+
+    if (matched.length === 0) {
+      showToast('No exercises for level ' + level, 'info')
       return
     }
-
-    const bodyPlan = exercisesData.levels[level][mapping.bodyPart as 'lowerBody' | 'upperBody']
-    if (!bodyPlan) { showToast('Keine Übungen für Level ' + level, 'info'); return }
-
-    let exercises: Exercise[] = []
-    mapping.blocks.forEach(bk => {
-      const exs = (bodyPlan as Record<string, Exercise[]>)[bk]
-      if (exs) exercises = exercises.concat(exs)
-    })
 
     // Load saved log
     const key = playerId + '_' + blockId + '_' + level
@@ -116,7 +108,7 @@ export function PlayerView({ players, showToast }: Props) {
     }
 
     setDetailTitle(code + ' - Level ' + level)
-    setDetailExercises(exercises)
+    setDetailExercises(matched)
     setDetailBlockId(blockId)
     setDetailLevel(level)
     setDetailDuration(duration)
@@ -130,7 +122,7 @@ export function PlayerView({ players, showToast }: Props) {
   }, [detailLevel, detailBlockId])
 
   const handleTimerFinished = useCallback(() => {
-    showToast('Zeit abgelaufen! Übung beendet.', 'success')
+    showToast('Time is up! Exercise finished.', 'success')
   }, [showToast])
 
   const handleSaveLog = async () => {
@@ -140,7 +132,7 @@ export function PlayerView({ players, showToast }: Props) {
       entries[exId] = data
     })
     await api.upsertPlayerLog(logKey.current, { entries, updatedAt: new Date().toISOString() })
-    showToast('Einträge gespeichert', 'success')
+    showToast('Entries saved', 'success')
   }
 
   const updateLogEntry = (exId: string, field: 'weight' | 'note', value: string) => {
@@ -167,17 +159,17 @@ export function PlayerView({ players, showToast }: Props) {
 
   return (
     <div className="player-plan-view">
-      <h2 style={{ color: 'var(--text-heading)', marginBottom: 16 }}>Spieler-Ansicht</h2>
+      <h2 style={{ color: 'var(--text-heading)', marginBottom: 16 }}>Player View</h2>
 
       <div className="player-select-bar">
-        <label className="form-label" style={{ margin: 0 }}>Spieler:</label>
+        <label className="form-label" style={{ margin: 0 }}>Player:</label>
         <select
           className="form-select"
           value={playerId}
           onChange={e => setPlayerId(e.target.value)}
           style={{ maxWidth: 200 }}
         >
-          <option value="">-- Spieler wählen --</option>
+          <option value="">-- Select player --</option>
           {players.map(p => (
             <option key={p.id} value={p.id}>{p.name} (Level {p.level})</option>
           ))}
@@ -187,7 +179,7 @@ export function PlayerView({ players, showToast }: Props) {
       {!playerId ? (
         <div className="empty-state">
           <div className="empty-state-icon">&#128100;</div>
-          <div className="empty-state-text">Bitte einen Spieler auswählen</div>
+          <div className="empty-state-text">Please select a player</div>
         </div>
       ) : !player ? null : (
         <>
@@ -205,12 +197,12 @@ export function PlayerView({ players, showToast }: Props) {
 
           {!plan ? (
             <div className="empty-state">
-              <div className="empty-state-text">Noch kein Wochenplan zugewiesen</div>
+              <div className="empty-state-text">No week plan assigned yet</div>
             </div>
           ) : (
             <>
               <h3 style={{ color: 'var(--text-heading)', marginBottom: 12 }}>
-                Aktueller Wochenplan ({plan.week || 'Unbekannt'})
+                Current Week Plan ({plan.week || 'Unknown'})
               </h3>
               <div className="week-grid" style={{ marginBottom: 16 }}>
                 {DAYS.map(day => {
@@ -277,29 +269,33 @@ export function PlayerView({ players, showToast }: Props) {
         )}
 
         {detailExercises.length === 0 ? (
-          <p style={{ color: 'var(--text-secondary)' }}>Keine Übungen gefunden</p>
+          <p style={{ color: 'var(--text-secondary)' }}>No exercises found</p>
         ) : (
           <>
-            {detailExercises.map((ex, i) => (
-              <div className="exercise-card" key={ex.id || i}>
-                <div className="exercise-name">{ex.order || ''}. {ex.name}</div>
+            {detailExercises.map((le, i) => (
+              <div className="exercise-card" key={le.id || i}>
+                <div className="exercise-name">{le.order || ''}. {le.exercise?.name || le.exerciseId}</div>
                 <div className="exercise-details">
                   <div className="detail-item">
+                    <div className="detail-label">Tempo</div>
+                    <div className="detail-value">{le.defaultTempo || '-'}</div>
+                  </div>
+                  <div className="detail-item">
                     <div className="detail-label">RPE</div>
-                    <div className="detail-value">{ex.defaultRPE || ex.tempo || '-'}</div>
+                    <div className="detail-value">{le.defaultRPE || '-'}</div>
                   </div>
                   <div className="detail-item">
                     <div className="detail-label">SxR</div>
-                    <div className="detail-value">{ex.defaultSxR || '-'}</div>
+                    <div className="detail-value">{le.defaultSxR || '-'}</div>
                   </div>
                   <div className="detail-item">
                     <div className="detail-label">Gewicht</div>
                     <input
                       className="weight-input"
                       type="text"
-                      placeholder={ex.defaultWeight || '-'}
-                      value={logData[ex.id]?.weight || ''}
-                      onChange={e => updateLogEntry(ex.id, 'weight', e.target.value)}
+                      placeholder={le.defaultWeight || '-'}
+                      value={logData[le.exerciseId]?.weight || ''}
+                      onChange={e => updateLogEntry(le.exerciseId, 'weight', e.target.value)}
                     />
                   </div>
                   <div className="detail-item">
@@ -309,8 +305,8 @@ export function PlayerView({ players, showToast }: Props) {
                       type="text"
                       style={{ width: 120 }}
                       placeholder="..."
-                      value={logData[ex.id]?.note || ''}
-                      onChange={e => updateLogEntry(ex.id, 'note', e.target.value)}
+                      value={logData[le.exerciseId]?.note || ''}
+                      onChange={e => updateLogEntry(le.exerciseId, 'note', e.target.value)}
                     />
                   </div>
                 </div>
@@ -321,13 +317,13 @@ export function PlayerView({ players, showToast }: Props) {
               style={{ marginTop: 12 }}
               onClick={handleSaveLog}
             >
-              Einträge speichern
+              Save entries
             </button>
           </>
         )}
 
         <div className="modal-actions">
-          <button className="btn btn-secondary" onClick={() => setDetailOpen(false)}>Schließen</button>
+          <button className="btn btn-secondary" onClick={() => setDetailOpen(false)}>Close</button>
         </div>
       </Modal>
     </div>

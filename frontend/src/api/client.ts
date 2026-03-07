@@ -1,4 +1,4 @@
-import type { Player, WeekPlan, Media, PlayerLog } from '../types'
+import type { Player, WeekPlan, Media, PlayerLog, Exercise, LevelExercise, Progression } from '../types'
 
 const BASE = '/api/v1'
 
@@ -46,4 +46,30 @@ export const api = {
   getSetting: (key: string) => request<{ key: string; value: string }>(`/settings/${key}`).catch(() => null),
   upsertSetting: (key: string, value: string) =>
     request<void>(`/settings/${key}`, { method: 'PUT', body: JSON.stringify({ key, value }) }),
+
+  // Exercises (master library)
+  getExercises: () => request<Exercise[]>('/exercises'),
+  getExercise: (id: string) => request<Exercise>(`/exercises/${id}`),
+  createExercise: (e: Omit<Exercise, 'id' | 'createdAt' | 'updatedAt'>) =>
+    request<Exercise>('/exercises', { method: 'POST', body: JSON.stringify(e) }),
+  updateExercise: (id: string, e: Partial<Exercise>) =>
+    request<Exercise>(`/exercises/${id}`, { method: 'PUT', body: JSON.stringify(e) }),
+  deleteExercise: (id: string) => request<void>(`/exercises/${id}`, { method: 'DELETE' }),
+
+  // Level Exercises (assignments)
+  getLevelExercises: (level?: string) =>
+    request<LevelExercise[]>(level ? `/level-exercises?level=${level}` : '/level-exercises'),
+  createLevelExercise: (le: Omit<LevelExercise, 'id'>) =>
+    request<LevelExercise>('/level-exercises', { method: 'POST', body: JSON.stringify(le) }),
+  updateLevelExercise: (id: string, le: Partial<LevelExercise>) =>
+    request<LevelExercise>(`/level-exercises/${id}`, { method: 'PUT', body: JSON.stringify(le) }),
+  deleteLevelExercise: (id: string) => request<void>(`/level-exercises/${id}`, { method: 'DELETE' }),
+
+  // Progressions
+  getProgressions: () => request<Progression[]>('/progressions'),
+  createProgression: (p: Omit<Progression, 'createdAt' | 'updatedAt'>) =>
+    request<Progression>('/progressions', { method: 'POST', body: JSON.stringify(p) }),
+  updateProgression: (id: string, p: Partial<Progression>) =>
+    request<Progression>(`/progressions/${id}`, { method: 'PUT', body: JSON.stringify(p) }),
+  deleteProgression: (id: string) => request<void>(`/progressions/${id}`, { method: 'DELETE' }),
 }

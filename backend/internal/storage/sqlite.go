@@ -2,6 +2,7 @@ package storage
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log/slog"
 
@@ -39,6 +40,30 @@ func (d *DB) Close() error {
 
 func (d *DB) createTables() error {
 	statements := []string{
+		`CREATE TABLE IF NOT EXISTS exercises (
+			id TEXT PRIMARY KEY,
+			name TEXT NOT NULL,
+			body_region TEXT NOT NULL DEFAULT '',
+			category TEXT NOT NULL DEFAULT '',
+			tags TEXT NOT NULL DEFAULT '[]',
+			equipment TEXT NOT NULL DEFAULT '[]',
+			description TEXT NOT NULL DEFAULT '',
+			created_at TEXT NOT NULL,
+			updated_at TEXT NOT NULL
+		)`,
+		`CREATE TABLE IF NOT EXISTS level_exercises (
+			id TEXT PRIMARY KEY,
+			exercise_id TEXT NOT NULL REFERENCES exercises(id),
+			level TEXT NOT NULL,
+			block TEXT NOT NULL,
+			order_num INTEGER NOT NULL DEFAULT 0,
+			default_tempo TEXT NOT NULL DEFAULT '',
+			default_rpe TEXT NOT NULL DEFAULT '',
+			default_sxr TEXT NOT NULL DEFAULT '',
+			default_weight TEXT NOT NULL DEFAULT ''
+		)`,
+		`CREATE INDEX IF NOT EXISTS idx_level_exercises_level ON level_exercises(level)`,
+		`CREATE INDEX IF NOT EXISTS idx_level_exercises_exercise ON level_exercises(exercise_id)`,
 		`CREATE TABLE IF NOT EXISTS players (
 			id TEXT PRIMARY KEY,
 			name TEXT NOT NULL,
@@ -69,6 +94,14 @@ func (d *DB) createTables() error {
 		`CREATE TABLE IF NOT EXISTS player_logs (
 			id TEXT PRIMARY KEY,
 			entries TEXT NOT NULL DEFAULT '[]',
+			updated_at TEXT NOT NULL
+		)`,
+		`CREATE TABLE IF NOT EXISTS progressions (
+			id TEXT PRIMARY KEY,
+			name TEXT NOT NULL,
+			body_region TEXT NOT NULL DEFAULT '',
+			steps TEXT NOT NULL DEFAULT '[]',
+			created_at TEXT NOT NULL,
 			updated_at TEXT NOT NULL
 		)`,
 		`CREATE TABLE IF NOT EXISTS settings (
@@ -318,6 +351,235 @@ func (d *DB) UpsertSetting(s models.Setting) error {
 		s.Key, s.Value)
 	if err != nil {
 		return fmt.Errorf("upsert setting: %w", err)
+	}
+	return nil
+}
+
+// --- Exercises ---
+
+func (d *DB) GetAllExercises() ([]models.Exercise, error) {
+	rows, err := d.db.Query("SELECT id, name, body_region, category, tags, equipment, description, created_at, updated_at FROM exercises ORDER BY name")
+	if err != nil {
+		return nil, fmt.Errorf("query exercises: %w", err)
+	}
+	defer rows.Close()
+
+	var exercises []models.Exercise
+	for rows.Next() {
+		var e models.Exercise
+		var tags, equip string
+		if err := rows.Scan(&e.ID, &e.Name, &e.BodyRegion, &e.Category, &tags, &equip, &e.Description, &e.CreatedAt, &e.UpdatedAt); err != nil {
+			return nil, fmt.Errorf("scan exercise: %w", err)
+		}
+		json.Unmarshal([]byte(tags), &e.Tags)
+		json.Unmarshal([]byte(equip), &e.Equipment)
+		if e.Tags == nil {
+			e.Tags = []string{}
+		}
+		if e.Equipment == nil {
+			e.Equipment = []string{}
+		}
+		exercises = append(exercises, e)
+	}
+	if exercises == nil {
+		exercises = []models.Exercise{}
+	}
+	return exercises, rows.Err()
+}
+
+func (d *DB) GetExercise(id string) (*models.Exercise, error) {
+	var e models.Exercise
+	var tags, equip string
+	err := d.db.QueryRow("SELECT id, name, body_region, category, tags, equipment, description, created_at, updated_at FROM exercises WHERE id = ?", id).
+		Scan(&e.ID, &e.Name, &e.BodyRegion, &e.Category, &tags, &equip, &e.Description, &e.CreatedAt, &e.UpdatedAt)
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, fmt.Errorf("query exercise %s: %w", id, err)
+	}
+	json.Unmarshal([]byte(tags), &e.Tags)
+	json.Unmarshal([]byte(equip), &e.Equipment)
+	if e.Tags == nil {
+		e.Tags = []string{}
+	}
+	if e.Equipment == nil {
+		e.Equipment = []string{}
+	}
+	return &e, nil
+}
+
+func (d *DB) UpsertExercise(e models.Exercise) error {
+	tagsJSON, _ := json.Marshal(e.Tags)
+	equipJSON, _ := json.Marshal(e.Equipment)
+	_, err := d.db.Exec(`
+		INSERT INTO exercises (id, name, body_region, category, tags, equipment, description, created_at, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+		ON CONFLICT(id) DO UPDATE SET
+			name=excluded.name, body_region=excluded.body_region, category=excluded.category,
+			tags=excluded.tags, equipment=excluded.equipment, description=excluded.description,
+			updated_at=excluded.updated_at`,
+		e.ID, e.Name, e.BodyRegion, e.Category, string(tagsJSON), string(equipJSON), e.Description, e.CreatedAt, e.UpdatedAt)
+	if err != nil {
+		return fmt.Errorf("upsert exercise: %w", err)
+	}
+	return nil
+}
+
+func (d *DB) DeleteExercise(id string) error {
+	// Delete level assignments first
+	d.db.Exec("DELETE FROM level_exercises WHERE exercise_id = ?", id)
+	res, err := d.db.Exec("DELETE FROM exercises WHERE id = ?", id)
+	if err != nil {
+		return fmt.Errorf("delete exercise: %w", err)
+	}
+	n, _ := res.RowsAffected()
+	if n == 0 {
+		return sql.ErrNoRows
+	}
+	return nil
+}
+
+// --- Level Exercises ---
+
+func (d *DB) GetLevelExercises(level string) ([]models.LevelExercise, error) {
+	rows, err := d.db.Query("SELECT id, exercise_id, level, block, order_num, default_tempo, default_rpe, default_sxr, default_weight FROM level_exercises WHERE level = ? ORDER BY block, order_num", level)
+	if err != nil {
+		return nil, fmt.Errorf("query level_exercises: %w", err)
+	}
+	defer rows.Close()
+
+	var les []models.LevelExercise
+	for rows.Next() {
+		var le models.LevelExercise
+		if err := rows.Scan(&le.ID, &le.ExerciseID, &le.Level, &le.Block, &le.OrderNum, &le.DefaultTempo, &le.DefaultRPE, &le.DefaultSxR, &le.DefaultWeight); err != nil {
+			return nil, fmt.Errorf("scan level_exercise: %w", err)
+		}
+		les = append(les, le)
+	}
+	if les == nil {
+		les = []models.LevelExercise{}
+	}
+	return les, rows.Err()
+}
+
+func (d *DB) GetAllLevelExercises() ([]models.LevelExercise, error) {
+	rows, err := d.db.Query("SELECT id, exercise_id, level, block, order_num, default_tempo, default_rpe, default_sxr, default_weight FROM level_exercises ORDER BY level, block, order_num")
+	if err != nil {
+		return nil, fmt.Errorf("query all level_exercises: %w", err)
+	}
+	defer rows.Close()
+
+	var les []models.LevelExercise
+	for rows.Next() {
+		var le models.LevelExercise
+		if err := rows.Scan(&le.ID, &le.ExerciseID, &le.Level, &le.Block, &le.OrderNum, &le.DefaultTempo, &le.DefaultRPE, &le.DefaultSxR, &le.DefaultWeight); err != nil {
+			return nil, fmt.Errorf("scan level_exercise: %w", err)
+		}
+		les = append(les, le)
+	}
+	if les == nil {
+		les = []models.LevelExercise{}
+	}
+	return les, rows.Err()
+}
+
+func (d *DB) UpsertLevelExercise(le models.LevelExercise) error {
+	_, err := d.db.Exec(`
+		INSERT INTO level_exercises (id, exercise_id, level, block, order_num, default_tempo, default_rpe, default_sxr, default_weight)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+		ON CONFLICT(id) DO UPDATE SET
+			exercise_id=excluded.exercise_id, level=excluded.level, block=excluded.block,
+			order_num=excluded.order_num, default_tempo=excluded.default_tempo,
+			default_rpe=excluded.default_rpe, default_sxr=excluded.default_sxr,
+			default_weight=excluded.default_weight`,
+		le.ID, le.ExerciseID, le.Level, le.Block, le.OrderNum, le.DefaultTempo, le.DefaultRPE, le.DefaultSxR, le.DefaultWeight)
+	if err != nil {
+		return fmt.Errorf("upsert level_exercise: %w", err)
+	}
+	return nil
+}
+
+func (d *DB) DeleteLevelExercise(id string) error {
+	res, err := d.db.Exec("DELETE FROM level_exercises WHERE id = ?", id)
+	if err != nil {
+		return fmt.Errorf("delete level_exercise: %w", err)
+	}
+	n, _ := res.RowsAffected()
+	if n == 0 {
+		return sql.ErrNoRows
+	}
+	return nil
+}
+
+func (d *DB) DeleteLevelExercisesByExercise(exerciseID string) error {
+	_, err := d.db.Exec("DELETE FROM level_exercises WHERE exercise_id = ?", exerciseID)
+	return err
+}
+
+// --- Progressions ---
+
+func (d *DB) GetAllProgressions() ([]models.Progression, error) {
+	rows, err := d.db.Query("SELECT id, name, body_region, steps, created_at, updated_at FROM progressions ORDER BY body_region, name")
+	if err != nil {
+		return nil, fmt.Errorf("query progressions: %w", err)
+	}
+	defer rows.Close()
+
+	var progs []models.Progression
+	for rows.Next() {
+		var p models.Progression
+		var steps string
+		if err := rows.Scan(&p.ID, &p.Name, &p.BodyRegion, &steps, &p.CreatedAt, &p.UpdatedAt); err != nil {
+			return nil, fmt.Errorf("scan progression: %w", err)
+		}
+		p.Steps = []byte(steps)
+		progs = append(progs, p)
+	}
+	if progs == nil {
+		progs = []models.Progression{}
+	}
+	return progs, rows.Err()
+}
+
+func (d *DB) GetProgression(id string) (*models.Progression, error) {
+	var p models.Progression
+	var steps string
+	err := d.db.QueryRow("SELECT id, name, body_region, steps, created_at, updated_at FROM progressions WHERE id = ?", id).
+		Scan(&p.ID, &p.Name, &p.BodyRegion, &steps, &p.CreatedAt, &p.UpdatedAt)
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, fmt.Errorf("query progression %s: %w", id, err)
+	}
+	p.Steps = []byte(steps)
+	return &p, nil
+}
+
+func (d *DB) UpsertProgression(p models.Progression) error {
+	steps := string(p.Steps)
+	_, err := d.db.Exec(`
+		INSERT INTO progressions (id, name, body_region, steps, created_at, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?)
+		ON CONFLICT(id) DO UPDATE SET
+			name=excluded.name, body_region=excluded.body_region,
+			steps=excluded.steps, updated_at=excluded.updated_at`,
+		p.ID, p.Name, p.BodyRegion, steps, p.CreatedAt, p.UpdatedAt)
+	if err != nil {
+		return fmt.Errorf("upsert progression: %w", err)
+	}
+	return nil
+}
+
+func (d *DB) DeleteProgression(id string) error {
+	res, err := d.db.Exec("DELETE FROM progressions WHERE id = ?", id)
+	if err != nil {
+		return fmt.Errorf("delete progression: %w", err)
+	}
+	n, _ := res.RowsAffected()
+	if n == 0 {
+		return sql.ErrNoRows
 	}
 	return nil
 }

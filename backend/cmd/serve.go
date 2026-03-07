@@ -106,6 +106,29 @@ func registerRoutes(mux *http.ServeMux, db *storage.DB) {
 	sh := &handlers.SettingHandler{DB: db}
 	mux.HandleFunc("GET /api/v1/settings/{key}", sh.Get)
 	mux.HandleFunc("PUT /api/v1/settings/{key}", sh.Update)
+
+	// Exercises (master library)
+	eh := &handlers.ExerciseHandler{DB: db}
+	mux.HandleFunc("GET /api/v1/exercises", eh.GetAll)
+	mux.HandleFunc("GET /api/v1/exercises/{id}", eh.Get)
+	mux.HandleFunc("POST /api/v1/exercises", eh.Create)
+	mux.HandleFunc("PUT /api/v1/exercises/{id}", eh.Update)
+	mux.HandleFunc("DELETE /api/v1/exercises/{id}", eh.Delete)
+
+	// Level Exercises (assignments)
+	leh := &handlers.LevelExerciseHandler{DB: db}
+	mux.HandleFunc("GET /api/v1/level-exercises", leh.GetAll)
+	mux.HandleFunc("POST /api/v1/level-exercises", leh.Create)
+	mux.HandleFunc("PUT /api/v1/level-exercises/{id}", leh.Update)
+	mux.HandleFunc("DELETE /api/v1/level-exercises/{id}", leh.Delete)
+
+	// Progressions
+	prh := &handlers.ProgressionHandler{DB: db}
+	mux.HandleFunc("GET /api/v1/progressions", prh.GetAll)
+	mux.HandleFunc("GET /api/v1/progressions/{id}", prh.Get)
+	mux.HandleFunc("POST /api/v1/progressions", prh.Create)
+	mux.HandleFunc("PUT /api/v1/progressions/{id}", prh.Update)
+	mux.HandleFunc("DELETE /api/v1/progressions/{id}", prh.Delete)
 }
 
 func corsMiddleware(next http.Handler) http.Handler {

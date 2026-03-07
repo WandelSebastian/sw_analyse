@@ -19,34 +19,34 @@ export function Dashboard({ players, plans, mediaCount, exerciseCount, onNavigat
       <div className="stat-grid">
         <div className="stat-card">
           <div className="stat-value">{players.length}</div>
-          <div className="stat-label">Spieler</div>
+          <div className="stat-label">Players</div>
         </div>
         <div className="stat-card">
           <div className="stat-value">{plans.length}</div>
-          <div className="stat-label">Wochenpläne</div>
+          <div className="stat-label">Week Plans</div>
         </div>
         <div className="stat-card">
           <div className="stat-value">{exerciseCount}</div>
-          <div className="stat-label">Übungen</div>
+          <div className="stat-label">Exercises</div>
         </div>
         <div className="stat-card">
           <div className="stat-value">{mediaCount}</div>
-          <div className="stat-label">Medien</div>
+          <div className="stat-label">Media</div>
         </div>
       </div>
 
       <div className="grid grid-2">
         <div className="card">
           <div className="card-header">
-            <span className="card-title">Aktuelle Spieler</span>
+            <span className="card-title">Current Players</span>
             <button className="btn btn-primary btn-sm" onClick={() => onNavigate('players')}>
-              Alle anzeigen
+              View all
             </button>
           </div>
           {lastPlayers.length === 0 ? (
             <div className="empty-state">
               <div className="empty-state-text" style={{ fontSize: 13 }}>
-                Noch keine Spieler angelegt
+                No players created yet
               </div>
             </div>
           ) : (
@@ -68,15 +68,15 @@ export function Dashboard({ players, plans, mediaCount, exerciseCount, onNavigat
 
         <div className="card">
           <div className="card-header">
-            <span className="card-title">Letzte Wochenpläne</span>
+            <span className="card-title">Recent Week Plans</span>
             <button className="btn btn-primary btn-sm" onClick={() => onNavigate('planner')}>
-              Neue Planung
+              New Plan
             </button>
           </div>
           {lastPlans.length === 0 ? (
             <div className="empty-state">
               <div className="empty-state-text" style={{ fontSize: 13 }}>
-                Noch keine Wochenpläne erstellt
+                No week plans created yet
               </div>
             </div>
           ) : (

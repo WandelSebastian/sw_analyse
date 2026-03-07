@@ -11,10 +11,10 @@ import type { Player, WeekPlan, Media, ViewId } from './types'
 
 const NAV_ITEMS: { id: ViewId; label: string }[] = [
   { id: 'dashboard', label: 'Dashboard' },
-  { id: 'planner', label: 'Wochenplanung' },
-  { id: 'players', label: 'Spieler' },
-  { id: 'exercises', label: 'Bibliothek' },
-  { id: 'player-view', label: 'Spieler-Ansicht' },
+  { id: 'planner', label: 'Week Planner' },
+  { id: 'players', label: 'Players' },
+  { id: 'exercises', label: 'Library' },
+  { id: 'player-view', label: 'Player View' },
 ]
 
 export default function App() {
@@ -49,24 +49,10 @@ export default function App() {
 
   useEffect(() => { loadData() }, [loadData])
 
-  // Load exercise count from static data
+  // Load exercise count from API
   useEffect(() => {
-    fetch('/data/exercises.json')
-      .then(r => r.ok ? r.json() : null)
-      .then(data => {
-        if (!data?.levels) return
-        let count = 0
-        for (const bodyParts of Object.values(data.levels) as Record<string, Record<string, unknown[]>>[]) {
-          for (const bodyPart of ['lowerBody', 'upperBody']) {
-            const plan = bodyParts[bodyPart]
-            if (!plan) continue
-            for (const block of ['explosiv', 'strengthA', 'strengthB', 'isometrics']) {
-              if (plan[block]) count += (plan[block] as unknown[]).length
-            }
-          }
-        }
-        setExerciseCount(count)
-      })
+    api.getExercises()
+      .then(exs => setExerciseCount(exs.length))
       .catch(() => {})
   }, [])
 
@@ -101,7 +87,7 @@ export default function App() {
   return (
     <>
       <header className="app-header">
-        <div className="app-logo">Krafttraining</div>
+        <div className="app-logo"><img src="/logo-t2m.png" alt="T2M" className="app-logo-img" /></div>
         <nav className="nav-tabs">
           {NAV_ITEMS.map(item => (
             <button
@@ -114,7 +100,7 @@ export default function App() {
           ))}
         </nav>
         <div className="header-actions">
-          <button className="btn-icon" onClick={toggleTheme} title="Theme wechseln">
+          <button className="btn-icon" onClick={toggleTheme} title="Toggle theme">
             {theme === 'light' ? '\u2600' : '\u263E'}
           </button>
         </div>

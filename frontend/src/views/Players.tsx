@@ -47,7 +47,7 @@ export function Players({ players, onSave, onDelete, showToast, onViewPlan }: Pr
 
   const handleSave = async () => {
     if (!form.name.trim()) {
-      showToast('Bitte Namen eingeben', 'error')
+      showToast('Please enter a name', 'error')
       return
     }
     await onSave({
@@ -60,7 +60,7 @@ export function Players({ players, onSave, onDelete, showToast, onViewPlan }: Pr
       notes: form.notes
     })
     setModalOpen(false)
-    showToast(editId ? 'Spieler aktualisiert' : 'Spieler angelegt', 'success')
+    showToast(editId ? 'Player updated' : 'Player created', 'success')
   }
 
   const confirmDelete = (p: Player) => {
@@ -73,20 +73,20 @@ export function Players({ players, onSave, onDelete, showToast, onViewPlan }: Pr
     await onDelete(deleteTarget.id)
     setConfirmOpen(false)
     setDeleteTarget(null)
-    showToast('Spieler gelöscht', 'success')
+    showToast('Player deleted', 'success')
   }
 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-        <h2 style={{ color: 'var(--text-heading)' }}>Spieler-Verwaltung</h2>
-        <button className="btn btn-primary" onClick={openAdd}>+ Spieler anlegen</button>
+        <h2 style={{ color: 'var(--text-heading)' }}>Player Management</h2>
+        <button className="btn btn-primary" onClick={openAdd}>+ Add Player</button>
       </div>
 
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Spieler suchen..."
+          placeholder="Search players..."
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -97,7 +97,7 @@ export function Players({ players, onSave, onDelete, showToast, onViewPlan }: Pr
           <div className="empty-state" style={{ gridColumn: '1/-1' }}>
             <div className="empty-state-icon">&#128100;</div>
             <div className="empty-state-text">
-              {search ? 'Keine Spieler gefunden' : 'Noch keine Spieler angelegt'}
+              {search ? 'No players found' : 'No players created yet'}
             </div>
           </div>
         ) : (
@@ -120,7 +120,7 @@ export function Players({ players, onSave, onDelete, showToast, onViewPlan }: Pr
               )}
               <div style={{ marginTop: 12, display: 'flex', gap: 6 }}>
                 <button className="btn btn-secondary btn-sm" onClick={() => openEdit(p)}>Bearbeiten</button>
-                <button className="btn btn-danger btn-sm" onClick={() => confirmDelete(p)}>Löschen</button>
+                <button className="btn btn-danger btn-sm" onClick={() => confirmDelete(p)}>Delete</button>
                 <button className="btn btn-primary btn-sm" onClick={() => onViewPlan(p.id)}>Plan ansehen</button>
               </div>
             </div>
@@ -131,7 +131,7 @@ export function Players({ players, onSave, onDelete, showToast, onViewPlan }: Pr
       {/* Add/Edit Modal */}
       <Modal
         open={modalOpen}
-        title={editId ? 'Spieler bearbeiten' : 'Spieler anlegen'}
+        title={editId ? 'Edit Player' : 'Add Player'}
         onClose={() => setModalOpen(false)}
       >
         <div className="form-group">
@@ -146,7 +146,7 @@ export function Players({ players, onSave, onDelete, showToast, onViewPlan }: Pr
         </div>
         <div className="grid grid-2" style={{ gap: 12 }}>
           <div className="form-group">
-            <label className="form-label">Größe (cm)</label>
+            <label className="form-label">Height (cm)</label>
             <input
               type="number"
               className="form-input"
@@ -208,17 +208,17 @@ export function Players({ players, onSave, onDelete, showToast, onViewPlan }: Pr
       {/* Confirm Delete Modal */}
       <Modal
         open={confirmOpen}
-        title="Spieler löschen"
+        title="Delete Player"
         onClose={() => setConfirmOpen(false)}
         maxWidth="420px"
       >
         <div className="dialog-message">
-          Soll <strong>{deleteTarget?.name}</strong> wirklich gelöscht werden?
-          Alle zugehörigen Wochenpläne bleiben erhalten.
+          Really delete <strong>{deleteTarget?.name}</strong>?
+          All associated week plans will be preserved.
         </div>
         <div className="modal-actions">
           <button className="btn btn-secondary" onClick={() => setConfirmOpen(false)}>Abbrechen</button>
-          <button className="btn btn-danger" onClick={handleDelete}>Ja, bestätigen</button>
+          <button className="btn btn-danger" onClick={handleDelete}>Yes, confirm</button>
         </div>
       </Modal>
     </div>

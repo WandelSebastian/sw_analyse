@@ -47,30 +47,50 @@ export interface PlayerLog {
   updatedAt: string
 }
 
+// Master exercise in the library
 export interface Exercise {
   id: string
   name: string
-  order?: number
-  tempo?: string
-  defaultRPE?: string | number
-  defaultSxR?: string
-  defaultWeight?: string
-  level?: string
-  bodyPart?: string
-  block?: string
+  bodyRegion: string    // lowerBody, upperBody, core, fullBody
+  category: string      // BH, KV, K, P, EX, ISO
+  tags: string[]
+  equipment: string[]
+  description: string
+  createdAt: string
+  updatedAt: string
 }
 
-export interface ProgressionLevel {
+// Exercise assigned to a specific level with training parameters
+export interface LevelExercise {
+  id: string
+  exerciseId: string
   level: string
-  exercise: string
+  block: string         // ukk, okk, ukex, okex, ukp, okp, ukiso, okiso, ukbh, okbh, ukkv, okkv
+  order: number
+  defaultTempo?: string
+  defaultRPE?: string
+  defaultSxR?: string
+  defaultWeight?: string
+}
+
+// Combined view for display (exercise + level params)
+export interface LevelExerciseWithDetails extends LevelExercise {
+  exercise?: Exercise
+}
+
+export interface ProgressionStep {
+  level: string
+  exerciseName: string
+  exerciseId?: string
 }
 
 export interface Progression {
-  id?: string
-  name?: string
-  fullName?: string
-  levels: ProgressionLevel[]
-  source?: string
+  id: string
+  name: string
+  bodyRegion: string  // lowerBody, upperBody, warmup
+  steps: ProgressionStep[]
+  createdAt: string
+  updatedAt: string
 }
 
 export interface BuildingBlock {
@@ -80,18 +100,6 @@ export interface BuildingBlock {
   defaultRPE: number
   defaultDuration: number | Record<string, number>
   color: string
-}
-
-export interface ExercisesData {
-  levels: Record<string, {
-    lowerBody?: Record<string, Exercise[]>
-    upperBody?: Record<string, Exercise[]>
-  }>
-}
-
-export interface ProgressionsData {
-  lowerBody: Progression[]
-  upperBody: Progression[]
 }
 
 export interface TemplatesData {

@@ -1,41 +1,41 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { api } from '../api/client'
 import { Modal } from '../components/Modal'
-import type { Player, DayData, WeekPlan, WeekTemplate, TemplatesData, ToastType, Exercise, ExercisesData } from '../types'
+import type { Player, DayData, WeekPlan, WeekTemplate, TemplatesData, ToastType, Exercise, LevelExercise } from '../types'
 
 const DAYS = ['samstag','sonntag','montag','dienstag','mittwoch','donnerstag','freitag'] as const
 const DAY_FULL: Record<string, string> = {
-  samstag:'Samstag', sonntag:'Sonntag', montag:'Montag',
-  dienstag:'Dienstag', mittwoch:'Mittwoch', donnerstag:'Donnerstag', freitag:'Freitag'
+  samstag:'Saturday', sonntag:'Sunday', montag:'Monday',
+  dienstag:'Tuesday', mittwoch:'Wednesday', donnerstag:'Thursday', freitag:'Friday'
 }
 
 const BLOCK_COLORS: Record<string, string> = {
   'wu-spr':'#4CAF50','ukk':'#2196F3','okk':'#FF9800','ukex':'#E91E63','okex':'#9C27B0',
-  'ukp':'#00BCD4','okp':'#009688','ukiso':'#795548','okiso':'#607D8B','bh1':'#8BC34A',
-  'bh2':'#CDDC39','kv1':'#FFC107','kv2':'#FF5722','praevention':'#3F51B5',
+  'ukp':'#00BCD4','okp':'#009688','ukiso':'#795548','okiso':'#607D8B','ukbh':'#8BC34A',
+  'okbh':'#CDDC39','ukkv':'#FFC107','okkv':'#FF5722','praevention':'#3F51B5',
   'spielen':'#555','match':'#c0392b','frei':'#777'
 }
 
 const DEFAULT_BLOCKS: { id: string; code: string; defaultRPE: number; defaultDuration: number }[] = [
-  {id:'wu-spr',code:'WU Spr',defaultRPE:5,defaultDuration:30},
-  {id:'ukk',code:'UKK',defaultRPE:6,defaultDuration:20},
-  {id:'okk',code:'OKK',defaultRPE:6,defaultDuration:20},
-  {id:'ukex',code:'Ukex',defaultRPE:4,defaultDuration:10},
-  {id:'okex',code:'Okex',defaultRPE:4,defaultDuration:10},
-  {id:'ukp',code:'Ukp',defaultRPE:4,defaultDuration:15},
-  {id:'okp',code:'Okp',defaultRPE:4,defaultDuration:15},
-  {id:'ukiso',code:'UKiso',defaultRPE:5,defaultDuration:10},
-  {id:'okiso',code:'OKiso',defaultRPE:4,defaultDuration:10},
-  {id:'bh1',code:'BH1',defaultRPE:3,defaultDuration:10},
-  {id:'bh2',code:'BH2',defaultRPE:3,defaultDuration:10},
-  {id:'kv1',code:'KV1',defaultRPE:1,defaultDuration:10},
-  {id:'kv2',code:'KV2',defaultRPE:2,defaultDuration:10},
-  {id:'praevention',code:'Prävention',defaultRPE:2,defaultDuration:10},
+  {id:'wu-spr',code:'WU',defaultRPE:5,defaultDuration:30},
+  {id:'ukk',code:'LB-S',defaultRPE:6,defaultDuration:20},
+  {id:'okk',code:'UB-S',defaultRPE:6,defaultDuration:20},
+  {id:'ukex',code:'LB-Ex',defaultRPE:4,defaultDuration:10},
+  {id:'okex',code:'UB-Ex',defaultRPE:4,defaultDuration:10},
+  {id:'ukp',code:'LB-P',defaultRPE:4,defaultDuration:15},
+  {id:'okp',code:'UB-P',defaultRPE:4,defaultDuration:15},
+  {id:'ukiso',code:'LB-Iso',defaultRPE:5,defaultDuration:10},
+  {id:'okiso',code:'UB-Iso',defaultRPE:4,defaultDuration:10},
+  {id:'ukbh',code:'LB-MH',defaultRPE:3,defaultDuration:10},
+  {id:'okbh',code:'UB-MH',defaultRPE:3,defaultDuration:10},
+  {id:'ukkv',code:'LB-BP',defaultRPE:1,defaultDuration:10},
+  {id:'okkv',code:'UB-BP',defaultRPE:2,defaultDuration:10},
+  {id:'praevention',code:'Prev',defaultRPE:2,defaultDuration:10},
 ]
 const EXTRA_BLOCKS = [
-  {id:'spielen',code:'Spielen',defaultRPE:0,defaultDuration:0},
+  {id:'spielen',code:'Play',defaultRPE:0,defaultDuration:0},
   {id:'match',code:'Match',defaultRPE:0,defaultDuration:0},
-  {id:'frei',code:'frei',defaultRPE:0,defaultDuration:0},
+  {id:'frei',code:'Off',defaultRPE:0,defaultDuration:0},
 ]
 
 function getBlockColor(id: string) { return BLOCK_COLORS[id] || '#888' }
@@ -67,16 +67,11 @@ interface Props {
   showToast: (msg: string, type: ToastType) => void
 }
 
-const BLOCK_MAP: Record<string, { bodyPart: string; blocks: string[] } | null> = {
-  'ukk': {bodyPart:'lowerBody', blocks:['strengthA','strengthB']},
-  'okk': {bodyPart:'upperBody', blocks:['strengthA','strengthB']},
-  'ukex': {bodyPart:'lowerBody', blocks:['explosiv']},
-  'okex': {bodyPart:'upperBody', blocks:['explosiv']},
-  'ukiso': {bodyPart:'lowerBody', blocks:['isometrics']},
-  'okiso': {bodyPart:'upperBody', blocks:['isometrics']},
-  'ukp': {bodyPart:'lowerBody', blocks:['strengthB']},
-  'okp': {bodyPart:'upperBody', blocks:['strengthB']},
-}
+// Block IDs now directly match LevelExercise.block values
+const EXERCISE_BLOCKS = new Set([
+  'ukk','okk','ukex','okex','ukp','okp','ukiso','okiso',
+  'ukbh','okbh','ukkv','okkv'
+])
 
 export function Planner({ players, showToast }: Props) {
   const [playerId, setPlayerId] = useState('')
@@ -84,7 +79,8 @@ export function Planner({ players, showToast }: Props) {
   const [weekData, setWeekData] = useState<Record<string, DayData>>(getDefaultWeek)
   const [templateIdx, setTemplateIdx] = useState('')
   const [templatesData, setTemplatesData] = useState<TemplatesData | null>(null)
-  const [exercisesData, setExercisesData] = useState<ExercisesData | null>(null)
+  const [allExercises, setAllExercises] = useState<Exercise[]>([])
+  const [allLevelExercises, setAllLevelExercises] = useState<LevelExercise[]>([])
   const [dayPickerOpen, setDayPickerOpen] = useState(false)
   const [confirmClearOpen, setConfirmClearOpen] = useState(false)
   const [weekPickerOpen, setWeekPickerOpen] = useState(false)
@@ -96,25 +92,22 @@ export function Planner({ players, showToast }: Props) {
   // Block exercises detail modal
   const [blockDetailOpen, setBlockDetailOpen] = useState(false)
   const [blockDetailTitle, setBlockDetailTitle] = useState('')
-  const [blockDetailExercises, setBlockDetailExercises] = useState<Exercise[]>([])
+  const [blockDetailExercises, setBlockDetailExercises] = useState<(LevelExercise & { exercise?: Exercise })[]>([])
 
   useEffect(() => {
-    const load = async (file: string) => {
-      try {
-        const r = await fetch(`/data/${file}`)
-        if (!r.ok) return null
-        return await r.json()
-      } catch {
-        return null
-      }
+    const loadStatic = async (file: string) => {
+      try { const r = await fetch(`/data/${file}`); return r.ok ? await r.json() : null }
+      catch { return null }
     }
-    Promise.all([load('templates.json'), load('exercises.json')]).then(([tmpl, ex]) => {
+    loadStatic('templates.json').then(tmpl => {
       if (!tmpl) {
         tmpl = { buildingBlocks: DEFAULT_BLOCKS.map(b => ({ ...b, color: BLOCK_COLORS[b.id] || '#888', name: b.code })), templates: [] }
       }
       setTemplatesData(tmpl)
-      setExercisesData(ex)
     })
+    Promise.all([api.getExercises(), api.getLevelExercises()])
+      .then(([exs, les]) => { setAllExercises(exs); setAllLevelExercises(les) })
+      .catch(() => null)
   }, [])
 
   const loadSavedPlan = useCallback(async () => {
@@ -241,13 +234,13 @@ export function Planner({ players, showToast }: Props) {
   }
 
   const handleLoadTemplate = () => {
-    if (templateIdx === '') { showToast('Bitte Template wählen', 'error'); return }
+    if (templateIdx === '') { showToast('Please select a template', 'error'); return }
     const tmpl = templates[parseInt(templateIdx)]
     if (!tmpl?.weeks?.[0]) return
 
     if (tmpl.weeks.length > 1) {
       const options = tmpl.weeks.map((w, i) => ({
-        label: `Woche ${i + 1}` + (w.totalRPE ? ` (RPE: ${w.totalRPE})` : ''),
+        label: `Week ${i + 1}` + (w.totalRPE ? ` (RPE: ${w.totalRPE})` : ''),
         value: i
       }))
       setWeekPickerOptions(options)
@@ -276,7 +269,7 @@ export function Planner({ players, showToast }: Props) {
       if (dayDef) {
         const specialTypes = ['spielen', 'match', 'frei']
         if (dayDef.type && specialTypes.includes(dayDef.type)) {
-          const typeLabel: Record<string, string> = { spielen: 'Spielen', match: 'Match', frei: 'frei' }
+          const typeLabel: Record<string, string> = { spielen: 'Play', match: 'Match', frei: 'Off' }
           newData[day] = {
             blocks: [{ id: dayDef.type, code: typeLabel[dayDef.type] || dayDef.type, rpe: 0, duration: 0 }],
             intensity: dayDef.intensity || '',
@@ -298,7 +291,7 @@ export function Planner({ players, showToast }: Props) {
     })
 
     setWeekData(newData)
-    showToast(`Template "${tmpl.name}" (Woche ${weekIdx + 1}) geladen`, 'success')
+    showToast(`Template "${tmpl.name}" (Week ${weekIdx + 1}) loaded`, 'success')
   }
 
   const handleClearWeek = () => {
@@ -307,18 +300,18 @@ export function Planner({ players, showToast }: Props) {
       setConfirmClearOpen(true)
     } else {
       setWeekData(getDefaultWeek())
-      showToast('Wochenplan geleert', 'info')
+      showToast('Week plan cleared', 'info')
     }
   }
 
   const doClearWeek = () => {
     setConfirmClearOpen(false)
     setWeekData(getDefaultWeek())
-    showToast('Wochenplan geleert', 'info')
+    showToast('Week plan cleared', 'info')
   }
 
   const handleSave = async () => {
-    if (!playerId) { showToast('Bitte Spieler auswählen', 'error'); return }
+    if (!playerId) { showToast('Please select a player', 'error'); return }
     let totalRPE = 0
     DAYS.forEach(d => { totalRPE += calcDayRPE(weekData[d]) })
 
@@ -331,15 +324,14 @@ export function Planner({ players, showToast }: Props) {
       createdAt: new Date().toISOString()
     }
     await api.upsertWeekPlan(plan)
-    showToast('Wochenplan gespeichert', 'success')
+    showToast('Week plan saved', 'success')
   }
 
   const handleBlockDblClick = (day: string, index: number) => {
     const block = weekData[day].blocks[index]
     if (!block || ['spielen', 'match', 'frei'].includes(block.id)) return
 
-    const mapping = BLOCK_MAP[block.id]
-    if (!mapping) { showToast('Keine Übungen für diesen Baustein', 'info'); return }
+    if (!EXERCISE_BLOCKS.has(block.id)) { showToast('No exercises for this block', 'info'); return }
 
     let level = '1'
     if (playerId) {
@@ -347,22 +339,19 @@ export function Planner({ players, showToast }: Props) {
       if (player) level = player.level
     }
 
-    if (!exercisesData?.levels?.[level]) {
-      showToast('Keine Übungen für Level ' + level, 'info')
+    const exerciseMap = new Map(allExercises.map(e => [e.id, e]))
+    const matched = allLevelExercises
+      .filter(le => le.level === level && le.block === block.id)
+      .map(le => ({ ...le, exercise: exerciseMap.get(le.exerciseId) }))
+      .sort((a, b) => a.order - b.order)
+
+    if (matched.length === 0) {
+      showToast('No exercises for level ' + level, 'info')
       return
     }
 
-    const plan = exercisesData.levels[level][mapping.bodyPart as 'lowerBody' | 'upperBody']
-    if (!plan) { showToast('Keine Übungen für Level ' + level, 'info'); return }
-
-    let exercises: Exercise[] = []
-    mapping.blocks.forEach(bk => {
-      const exs = (plan as Record<string, Exercise[]>)[bk]
-      if (exs) exercises = exercises.concat(exs)
-    })
-
     setBlockDetailTitle(block.code + ' - Level ' + level)
-    setBlockDetailExercises(exercises)
+    setBlockDetailExercises(matched)
     setBlockDetailOpen(true)
   }
 
@@ -372,23 +361,23 @@ export function Planner({ players, showToast }: Props) {
 
   return (
     <div>
-      <h2 style={{ color: 'var(--text-heading)', marginBottom: 16 }}>Wochenplanung</h2>
+      <h2 style={{ color: 'var(--text-heading)', marginBottom: 16 }}>Week Planner</h2>
 
       <div className="week-controls">
         <div className="player-select-bar" style={{ flex: 1 }}>
-          <label className="form-label" style={{ margin: 0, whiteSpace: 'nowrap' }}>Spieler:</label>
+          <label className="form-label" style={{ margin: 0, whiteSpace: 'nowrap' }}>Player:</label>
           <select
             className="form-select"
             value={playerId}
             onChange={e => setPlayerId(e.target.value)}
             style={{ maxWidth: 200 }}
           >
-            <option value="">-- Spieler wählen --</option>
+            <option value="">-- Select player --</option>
             {players.map(p => (
               <option key={p.id} value={p.id}>{p.name} (Level {p.level})</option>
             ))}
           </select>
-          <label className="form-label" style={{ margin: 0, whiteSpace: 'nowrap', marginLeft: 12 }}>Woche:</label>
+          <label className="form-label" style={{ margin: 0, whiteSpace: 'nowrap', marginLeft: 12 }}>Week:</label>
           <input
             type="week"
             className="form-input"
@@ -411,14 +400,14 @@ export function Planner({ players, showToast }: Props) {
           </select>
           <button className="btn btn-primary btn-sm" onClick={handleLoadTemplate}>Laden</button>
           <button className="btn btn-secondary btn-sm" onClick={handleClearWeek}>Leeren</button>
-          <button className="btn btn-primary btn-sm" onClick={handleSave}>Speichern</button>
+          <button className="btn btn-primary btn-sm" onClick={handleSave}>Save</button>
         </div>
       </div>
 
       {/* Block palette */}
       <div className="card" style={{ padding: 8 }}>
         <div style={{ marginBottom: 8, fontSize: 13, color: 'var(--text-secondary)' }}>
-          Bausteine per Drag &amp; Drop oder Klick in den Wochenplan ziehen:
+          Drag &amp; drop or click blocks to add to the week plan:
         </div>
         <div className="block-palette">
           {allPaletteBlocks.map(b => (
@@ -457,7 +446,7 @@ export function Planner({ players, showToast }: Props) {
                     color: 'var(--text-primary)', fontSize: 11, padding: 2, marginLeft: 4
                   }}
                   placeholder="--"
-                  title="Intensität (z.B. 4+, 3-, 2+)"
+                  title="Intensity (e.g. 4+, 3-, 2+)"
                 />
               </div>
               <div
@@ -506,7 +495,7 @@ export function Planner({ players, showToast }: Props) {
       {/* Week total */}
       <div className="card" style={{ marginTop: 12 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span className="card-title">Wochen-Zusammenfassung</span>
+          <span className="card-title">Weekly Summary</span>
           <span style={{ fontSize: 20, fontWeight: 700, color: 'var(--accent)' }}>RPE: {weekTotalRPE}</span>
         </div>
       </div>
@@ -514,7 +503,7 @@ export function Planner({ players, showToast }: Props) {
       {/* Day Picker Modal */}
       <Modal
         open={dayPickerOpen}
-        title={pendingBlockRef.current ? pendingBlockRef.current.code + ' hinzufügen' : 'Tag auswählen'}
+        title={pendingBlockRef.current ? pendingBlockRef.current.code + ' — Select Day' : 'Select Day'}
         onClose={() => setDayPickerOpen(false)}
         maxWidth="380px"
       >
@@ -526,30 +515,30 @@ export function Planner({ players, showToast }: Props) {
           ))}
         </div>
         <div className="modal-actions">
-          <button className="btn btn-secondary" onClick={() => setDayPickerOpen(false)}>Abbrechen</button>
+          <button className="btn btn-secondary" onClick={() => setDayPickerOpen(false)}>Cancel</button>
         </div>
       </Modal>
 
       {/* Confirm Clear Modal */}
       <Modal
         open={confirmClearOpen}
-        title="Wochenplan leeren"
+        title="Clear Week Plan"
         onClose={() => setConfirmClearOpen(false)}
         maxWidth="420px"
       >
         <div className="dialog-message">
-          Alle Bausteine aus dem aktuellen Wochenplan entfernen?
+          Remove all blocks from the current week plan?
         </div>
         <div className="modal-actions">
-          <button className="btn btn-secondary" onClick={() => setConfirmClearOpen(false)}>Abbrechen</button>
-          <button className="btn btn-danger" onClick={doClearWeek}>Ja, bestätigen</button>
+          <button className="btn btn-secondary" onClick={() => setConfirmClearOpen(false)}>Cancel</button>
+          <button className="btn btn-danger" onClick={doClearWeek}>Yes, confirm</button>
         </div>
       </Modal>
 
       {/* Week Picker Modal (for multi-week templates) */}
       <Modal
         open={weekPickerOpen}
-        title={pendingTemplateRef.current ? 'Woche auswählen - ' + pendingTemplateRef.current.name : 'Woche auswählen'}
+        title={pendingTemplateRef.current ? 'Select Week - ' + pendingTemplateRef.current.name : 'Select Week'}
         onClose={() => setWeekPickerOpen(false)}
         maxWidth="420px"
       >
@@ -565,7 +554,7 @@ export function Planner({ players, showToast }: Props) {
           ))}
         </div>
         <div className="modal-actions">
-          <button className="btn btn-secondary" onClick={() => setWeekPickerOpen(false)}>Abbrechen</button>
+          <button className="btn btn-secondary" onClick={() => setWeekPickerOpen(false)}>Cancel</button>
         </div>
       </Modal>
 
@@ -577,22 +566,22 @@ export function Planner({ players, showToast }: Props) {
         maxWidth="800px"
       >
         {blockDetailExercises.length === 0 ? (
-          <p style={{ color: 'var(--text-secondary)' }}>Keine Übungen gefunden</p>
+          <p style={{ color: 'var(--text-secondary)' }}>No exercises found</p>
         ) : (
-          blockDetailExercises.map((ex, i) => (
-            <div className="exercise-card" key={ex.id || i}>
-              <div className="exercise-name">{ex.order || ''}. {ex.name}</div>
+          blockDetailExercises.map((le, i) => (
+            <div className="exercise-card" key={le.id || i}>
+              <div className="exercise-name">{le.order || ''}. {le.exercise?.name || le.exerciseId}</div>
               <div className="exercise-details">
-                <div className="detail-item"><div className="detail-label">Tempo</div><div className="detail-value">{ex.tempo || ex.defaultRPE || '-'}</div></div>
-                <div className="detail-item"><div className="detail-label">RPE</div><div className="detail-value">{ex.defaultRPE || '-'}</div></div>
-                <div className="detail-item"><div className="detail-label">SxR</div><div className="detail-value">{ex.defaultSxR || '-'}</div></div>
-                <div className="detail-item"><div className="detail-label">Gewicht</div><div className="detail-value">{ex.defaultWeight || '-'}</div></div>
+                <div className="detail-item"><div className="detail-label">Tempo</div><div className="detail-value">{le.defaultTempo || '-'}</div></div>
+                <div className="detail-item"><div className="detail-label">RPE</div><div className="detail-value">{le.defaultRPE || '-'}</div></div>
+                <div className="detail-item"><div className="detail-label">SxR</div><div className="detail-value">{le.defaultSxR || '-'}</div></div>
+                <div className="detail-item"><div className="detail-label">Gewicht</div><div className="detail-value">{le.defaultWeight || '-'}</div></div>
               </div>
             </div>
           ))
         )}
         <div className="modal-actions">
-          <button className="btn btn-secondary" onClick={() => setBlockDetailOpen(false)}>Schließen</button>
+          <button className="btn btn-secondary" onClick={() => setBlockDetailOpen(false)}>Close</button>
         </div>
       </Modal>
     </div>
